@@ -22,7 +22,7 @@
             align-items: center;
             z-index: 9999;
             transition: opacity 1s ease-out, visibility 1s;
-            color: #ffffff !important; /* التأكد من اللون الأبيض */
+            color: #ffffff !important;
             text-align: center;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             padding: 20px;
@@ -59,7 +59,7 @@
             text-shadow: 0 0 15px #0055d4;
             margin: 10px 0;
             display: none; 
-            color: #ffffff !important; /* التأكد من اللون الأبيض قبل الفتح */
+            color: #ffffff !important;
         }
 
         #welcome-msg-1 { display: block; animation: pulse 2s infinite; }
@@ -95,7 +95,6 @@
             background-color: #f0f2f5;
         }
 
-        /* التعديل لضمان أن نصوص المحتوى الداخلي فقط هي التي تتأثر بالأسود */
         #main-content p, #main-content h2, #main-content h6, #main-content label, #main-content div, #main-content span {
             color: #000000 !important;
         }
@@ -172,19 +171,32 @@
             font-weight: bold;
             transition: 0.3s;
             border: 1px solid #0055d4;
-            margin-bottom: 10px; /* إضافة مسافة بسيطة */
-        }
-
-        .fb-link:hover {
-            background-color: #0055d4;
-            color: white !important;
+            margin-bottom: 10px;
         }
 
         #main-content { display: none; width: 100%; }
+
+        /* تنسيق صفحة النجاح */
+        #success-page {
+            display: none;
+            text-align: center;
+            padding: 50px 20px;
+            font-family: sans-serif;
+        }
     </style>
 </head>
 
 <body>
+
+    <div id="success-page">
+        <div class="contact-container">
+            <h2 style="color: #28a745 !important;">✅ تم إرسال الرسالة بنجاح</h2>
+            <p>شكراً لتواصلك معنا، سنرد عليك قريباً جداً.</p>
+            <p>سيتم إعادتك للموقع تلقائياً خلال ثوانٍ...</p>
+            <br>
+            <a href="https://nyalaa.github.io/" style="color: #0055d4 !important; font-weight: bold;">اضغط هنا للعودة فوراً</a>
+        </div>
+    </div>
 
     <div id="splash-screen">
         <div class="ai-loader"></div>
@@ -219,8 +231,7 @@
             <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" style="width: 100%; border-radius: 10px;">
 
             <form action="https://formsubmit.co/fastfyks@gmail.com" method="post">
-                <input type="hidden" name="_next" value="https://nyalaa.github.io/">
-                
+                <input type="hidden" name="_next" value="https://nyalaa.github.io/?status=success">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="_template" value="table">
                 <input type="hidden" name="_subject" value="رسالة جديدة!">
@@ -281,6 +292,18 @@
         updateClock();
 
         window.onload = function() {
+            // فحص إذا كان المستخدم قادماً من عملية إرسال ناجحة
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('status') === 'success') {
+                document.getElementById('success-page').style.display = 'block';
+                document.getElementById('splash-screen').style.display = 'none';
+                // العودة للموقع الأصلي بعد 4 ثواني
+                setTimeout(() => {
+                    window.location.href = "https://nyalaa.github.io/";
+                }, 4000);
+                return; // إيقاف باقي العمليات
+            }
+
             const m1 = document.getElementById('welcome-msg-1');
             const m2 = document.getElementById('welcome-msg-2');
             const m3 = document.getElementById('thanks-msg');
