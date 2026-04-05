@@ -1,0 +1,431 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+     
+<head>
+               
+   
+
+
+<meta property="og:description" content="معالجة المشاكل التي تخص مواقع التواصل الاجتماعي  وإنشاء المواقع الإلكترونية">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>البحير نت</title>
+
+    <style>
+            /* تنسيق بسيط لجعل المظهر جذاباً */
+        #clock-container {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #000000;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            width: fit-content;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        #date { color: #0c45ff; font-size: 1.2rem; }
+        #time { color: #bd0d00; font-size: 2rem; font-weight: bold; display: block; }
+        /* إعدادات الخط والألوان الأساسية */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #e03030c7 0%, #c5131300 100%);
+            --secondary-color: #ffffff;
+            --accent-color: #000000;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+         
+            min-height: 200vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+            color: #000000;
+            font-size: large;
+            
+            
+        }
+
+        .contact-container {
+            background: var(--secondary-color);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 550px;
+            text-align: center;
+        }
+
+        h2 {
+            color:#e61d1d;
+            margin-bottom: 30px;
+            font-size: 20px;
+            font-family: 'Times New Roman', Times, serif;
+            text-shadow: 0px 0px 5px black 0px -5px 5px;
+            box-shadow: yellow;
+        }
+
+        /* تنسيق الحقول */
+        .form-group {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #000000;
+        }
+
+        textarea, input, select {
+            width: 70%;
+            padding: 12px 15px;
+            border: 2px solid #979393;
+            border-radius: 10px;
+            box-sizing: border-box; /* لضمان عدم خروج الحواف */
+            font-size: 16px;
+            transition: all 0.3s ease;
+            outline: none;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        textarea:focus, input:focus, select:focus {
+            border-color: #000000;
+            box-shadow: 0 0 8px rgba(255, 2, 2, 0.945);
+        }
+
+        /* تنسيق الصفوف (المدخلات المزدوجة) */
+        .row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .row .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        button {
+            background-color: rgb(0, 116, 231);
+            color: rgb(0, 0, 0);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: large;
+            font-weight: bold;
+            cursor: pointer;
+            width: 50%;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 4px;
+            
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.932);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        /* تحسين العرض على الهواتف */
+        @media (max-width: 480px) {
+            
+            .row {
+                flex-direction: column;
+            }
+        }
+        input  reset {
+             background-color: rgb(5, 131, 248);
+            color: rgb(255, 255, 255);
+            font-size: large;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        
+        }
+        h1 a{
+            text-decoration: none;
+            margin: 33px;
+             color: #ec2b2b;
+             margin-top: 17px;
+             font-size: large;
+           
+        
+             
+
+             
+             
+             
+            
+             
+             tab-size: 7pt;
+        }
+  :hover a{
+    text-shadow: #ff0606;
+  }
+  a { 
+ list-style: disc;
+ cursor: grab;
+ padding: 0px;
+ 
+
+ 
+  }
+  
+footer{
+    background-color: #020000;
+    color: #fdfdfd;
+    margin-top: 30px;
+    padding: 20px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+
+  
+}
+
+p a{
+    text-decoration: none;
+    color: #ff0606;
+    font-size: large;
+    
+}
+p{
+    color: #af0d0d;
+    font-style: bold;
+    font-size: large;
+}
+a{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-family: sans-serif;
+  
+    
+}
+/* تنسيق بسيط لجعل المظهر جذاباً */
+        #clock-container {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f8f8;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: fit-content;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(118, 175, 43, 0.507);
+        }
+        #date { color: #0c0909; font-size: 1.2rem; }
+        #time { color: #0055d4; font-size: 2rem; font-weight: bold; display: block; }
+        #box1{
+            border: 4px solid;
+color: #ffffff;
+font-size: 22px;
+background: #0055d4;
+animation-duration: 10ms;
+
+    
+} 
+
+    
+
+fieldset{
+    background-color: #342baccb;
+    color: rgb(255, 246, 246);
+
+}
+h6{
+    color: rgb(0, 4, 255);
+    font-size: large;
+}
+
+    fieldset a{
+        color: #f5f5f5;
+        font-size: large;
+    }    
+    strong a{
+        color: #ffffff;
+        font-family: sans-serif;
+      
+    }
+    </style> 
+    
+ 
+</head>
+
+<body>
+    
+  
+    <div class="contact-container">
+
+
+      
+     
+      <strong> 
+
+        
+               
+        
+         <div id="clock-container">
+    <div id="date">جاري التحميل...</div>
+    <div id="time">00:00:00</div>
+</div>
+
+<script>
+    function updateClock() {
+        const now = new Date();
+
+        // تنسيق التاريخ (مثال: الأحد، 29 مارس 2026)
+        const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const dateString = now.toLocaleDateString('ar-EG', dateOptions);
+
+        // تنسيق الوقت (مثال: 05:22:30 م)
+        const timeString = now.toLocaleTimeString('ar-EG');
+
+        // وضع البيانات في العناصر
+        document.getElementById('date').textContent = dateString;
+        document.getElementById('time').textContent = timeString;
+    }
+
+    // تحديث الساعة كل ثانية (1000 ميلي ثانية)
+    setInterval(updateClock, 1000);
+
+    // تشغيل الدالة فوراً عند تحميل الصفحة
+    updateClock();
+</script>
+
+        
+    
+       </h1>
+      
+        <hr>
+       
+               <p>
+            
+     
+             يوفر موقع البحير نت حلول تقنية كاملة في مجال التكنولوجيا ومواقع التواصل الاجتماعية
+            كما يوفر لك الموقع استشارات واجوبة فيما يتعلق مجال البرمجة وامن المعلومات والهاكر الاخلاقي
+     يعمل الموقع 24 ساعة ويواكب تحديثات علي مدار 24 ساعة في تحليل البيانات والخوارزميات لترضي الزوار في معالجة مشاكلهم
+    
+  
+
+         </p>
+        
+    <h6>  تم بناء وتصميم الموقع بواسطة المبرمج محمود عصام بهدف تسهيل الخدمات التي تشمل عالم تكنولوجيا الاتصالات وعالم البرمجة والامن المعلوماتي والهكر الاخلاقي وتأمين البيانات ...
+        </h6>     <hr>
+ 
+    |جامعة السودان التقانية| 
+    كلية نيالا التقانية, IT
+  < محمود عصام >
+ 
+    
+  الشهادات: 
+  والدورات 
+  <br>
+  <br>
+  
+  
+   <fieldset> 
+اساسيات الحاسب الالي
+   </fieldset>
+             <fieldset>
+         صناعة المحتوي الرقمي
+
+             </fieldset>   
+             <fieldset> امن المعلومات</fieldset>  
+             <fieldset>   <a href="https://www.facebook.com/profile.php?id=100077831043049"> اضغط هنا</a> لمتابعة مبرمج الموقع علي فيسبوك</fieldset>
+             <fieldset> ICDL</fieldset>
+             <fieldset> التسويق الإلكتروني والاعلانات</fieldset>
+<fieldset> التوعية في الامن السيبراني</fieldset>
+        <br>
+        <br>
+    
+        <br>
+
+         </strong> <div style="margin-top: 30px;">
+
+ 
+
+        
+            </div>
+
+        
+        <form action="https://formsubmit.co/fastfyks@gmail.com" method="post">
+ 
+
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_subject" value="رسالة جديدة!">    
+  <div class="form-group">
+                
+                     <div class="form-group">
+                   
+                    <input type="text" name="الاسم الاول" placeholder=" ادخل الاسم الكامل" required>
+                </div>
+                <select name="المشكلة" required>
+                    
+                  
+                
+                    <option value="" disabled selected> اختار نوع تواصلك</option>
+                     <option value="امرا اخر"> امرا اخر</option>
+                        <option value="برمجة شبكات الواي فاي"> برمجة شبكات الواي فاي</option>
+              <option value="ربط أنتينا"> ربط أنتينا</option> 
+                 <option value="استضافة لموقع إلكتروني">استضافة لموقع إلكتروني</option>
+                    <option value="تم قفل حسابي علي فيسبوك">تم قفل حسابي علي فيسبوك</option>
+                    <option value="تأمين حساب فايسبوك ومواقع التواصل الاجتماعية الاخري">تأمين حساب فيسبوك ومواقع التواصل الاجتماعية الاخري</option>
+                <option value="انا تقني تكنولوجيا المعلومات واريد شراكة معك"> انا تقني  تكنولوجيا المعلومات واريد شراكة معك</option>
+
+                    <option value=" تأكيد حساب الفيسبوك بالبطاقة القومية او جواز السفر"> تأكيد  حساب فيسبوك بالبطاقة القومية او جواز السفر</option>
+                    <option value="انا طالب it واريد العمل معك في مجال تصميم المواقع "> انا طالب it واريد العمل معك</option>
+
+<option value="اود ان ابني شراكة معكم في مجال الهكر الاخلاقي وامن المعلومات">اود ان ابني شراكة معكم في مجال الهكر الاخلاقي وامن المعلومات</option>
+              <option value="فتح حساب تويتر"> فتح حساب تويتر</option>
+                  <option value="فتح حساب فيسبوك"> فتح حساب فيسبوك </option>
+                    <option value="فتح حساب انستغرام">فتح حساب انستغرام </option>
+       <option value="فتح حساب واتساب"> فتح حساب واتساب</option>
+           <option value=" فتح حساب بنكي _ بنكك_ او كاش _ بنك المشرق _فوري محفظة إلكترونية
+">   فتح حساب بنكي _ بنكك_ او كاش _ بنك المشرق _فوري محفظة إلكترونية</option>
+
+               
+                  
+              
+</select>
+
+            </div>
+            <div class="form-group">
+                <label>اكتب رسالتك  داخل المستطيل</label>
+                <textarea name="الرسالة" rows="4" placeholder=" اكتب رسالتك هنا تتضمن رقم هاتفك الخاص بالواتساب او الإيميل حتي يتم الاتصال بك في اقرب وقت ممكن...." required></textarea>
+            </div>
+
+              
+   <div class="form-group">
+ 
+                <label> ما تقييمك لخدماتنا؟</label>
+                <select name="تقييم الخدمات" required>
+                    <option value="" disabled selected>اختر خياراً...</option>
+                    <option value="غير راضي"> غير راضي</option>
+                    <option value="راضي">راضي </option>
+                    <option value="جيد ">راضي جدا</option>
+                    <option value=" جميل جدا">اوصي بزيارة الموقع</option>
+                    <option value="راضي الي حد كبير واوصي بزيارة الموقع">راضي الي حد كبير واوصي بزيارة الموقع</option>
+                  
+                </select>
+            </div>
+            <input type="reset" value="اضغط هنا لإعادة الاختيار">
+            <input type="hidden"name="-success"value="تم ارسال رسالتك بنجاح سنرد عليك قريبا يا مكنه">
+            <button type="submit">إرسال البيانات</button> 
+            
+
+        </form>
+        <hr>
+        <strong>  <a href="index.html.html">اضغط هنا للرجوع لللأعلي </a> </strong>
+         
+    
+
+</body>
+</html>
