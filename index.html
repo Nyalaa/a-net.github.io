@@ -8,172 +8,89 @@
     <title>البحير نت</title>
 
     <style>
-        /* --- تأثيرات شاشة الترحيب (AI Splash Screen) --- */
+        /* --- شاشة الترحيب --- */
         #splash-screen {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, #1a1a2e 0%, #000000 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 1s ease-out, visibility 1s;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, #0a192f 0%, #000 100%);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 9999; transition: opacity 1s, visibility 1s;
         }
-
         .ai-loader {
-            width: 100px;
-            height: 100px;
-            border: 3px solid transparent;
-            border-top-color: #0055d4;
-            border-radius: 50%;
-            animation: spin 1.5s linear infinite;
-            position: relative;
+            width: 80px; height: 80px; border: 4px solid transparent;
+            border-top-color: #64ffda; border-radius: 50%; animation: spin 1s linear infinite;
         }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        .ai-loader::before {
-            content: "";
-            position: absolute;
-            top: 10px; left: 10px; right: 10px; bottom: 10px;
-            border: 3px solid transparent;
-            border-top-color: #ff0606;
-            border-radius: 50%;
-            animation: spin 2s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .welcome-msg {
-            color: white;
-            margin-top: 20px;
-            font-size: 1.8rem;
-            text-align: center;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-shadow: 0 0 15px #0055d4;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.05); }
-        }
-
-        /* --- التنسيقات الأصلية مع تحسينات بسيطة للصور --- */
-        #clock-container {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8f8f8;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            width: fit-content;
-            margin: 20px auto;
-            box-shadow: 0 4px 8px rgba(118, 175, 43, 0.507);
-        }
-
-        #date { color: #0c0909; font-size: 1.2rem; }
-        #time { color: #0055d4; font-size: 2rem; font-weight: bold; display: block; }
-
-        :root {
-            --primary-gradient: linear-gradient(135deg, #e03030c7 0%, #c5131300 100%);
-            --secondary-color: #ffffff;
-            --accent-color: #000000;
-        }
-
+        /* --- التنسيقات العامة --- */
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            margin: 0;
-            padding: 20px;
-            color: #000000;
-            font-size: large;
-            background-color: #f0f2f5;
-        }
-
-        /* صورة الهيدر */
-        .header-image {
-            width: 100%;
-            max-width: 300px;
-            height: auto;
-            border-radius: 15px;
-            margin-bottom: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0; padding: 0;
+            background-color: #0a192f; /* خلفية الموقع الأساسية */
+            color: #ccd6f6;
+            display: flex; justify-content: center; align-items: center; min-height: 100vh;
         }
 
         .contact-container {
-            background: var(--secondary-color);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            width: 100%;
-            max-width: 550px;
-            text-align: center;
-            margin: 0 auto;
+            background: #112240; /* لون الحاوية الرئيسية */
+            width: 95%; max-width: 600px;
+            border-radius: 20px; overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            margin: 20px;
         }
 
-        h2 {
-            color:#e61d1d;
-            margin-bottom: 30px;
-            font-size: 20px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        /* --- تنسيق الأقسام بألوان مختلفة --- */
+        .section-header {
+            background: #1d3557; /* لون قسم الهيدر */
+            padding: 30px; text-align: center;
+        }
+        .section-info {
+            background: #112240; /* لون قسم المعلومات */
+            padding: 25px; border-top: 2px solid #64ffda;
+        }
+        .section-form {
+            background: #1b263b; /* لون قسم النموذج */
+            padding: 30px; border-top: 2px solid #e63946;
         }
 
-        .form-group { margin-bottom: 20px; text-align: center; }
-        label { display: block; margin-bottom: 8px; font-weight: bold; color: #000000; }
-        
-        textarea, input, select {
-            width: 90%;
-            padding: 12px 15px;
-            border: 2px solid #979393;
-            border-radius: 10px;
-            box-sizing: border-box;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            outline: none;
+        .header-image {
+            width: 100%; max-height: 200px; object-fit: cover; border-radius: 10px;
         }
 
-        textarea:focus, input:focus, select:focus {
-            border-color: #0055d4;
-            box-shadow: 0 0 8px rgba(0, 85, 212, 0.3);
+        #clock-container {
+            background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px;
+            margin: 15px auto; border: 1px solid #64ffda;
+        }
+        #date { color: #8892b0; font-size: 0.9rem; }
+        #time { color: #64ffda; font-size: 1.8rem; font-weight: bold; }
+
+        p { line-height: 1.6; color: #a8b2d1; font-size: 1.1rem; }
+        h6 { color: #64ffda; margin-top: 10px; font-weight: normal; }
+
+        /* --- تنسيق المدخلات --- */
+        .form-group { margin-bottom: 20px; }
+        input, select, textarea {
+            width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #233554;
+            background: #0a192f; color: white; font-size: 1rem; box-sizing: border-box;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: #64ffda; outline: none; box-shadow: 0 0 10px rgba(100, 255, 218, 0.2);
         }
 
         button {
-            background-color: rgb(0, 116, 231);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
-            font-size: large;
-            font-weight: bold;
-            cursor: pointer;
-            width: 80%;
-            transition: transform 0.2s, box-shadow 0.2s;
-            margin-top: 15px;
+            width: 100%; padding: 15px; border: none; border-radius: 8px;
+            background: #64ffda; color: #0a192f; font-weight: bold;
+            font-size: 1.1rem; cursor: pointer; transition: 0.3s;
         }
+        button:hover { background: #52d1b2; transform: translateY(-3px); }
 
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        /* حذف الخط من الرابط */
+        .fb-link {
+            text-decoration: none; color: #64ffda; font-weight: bold; transition: 0.3s;
         }
+        .fb-link:hover { color: #fff; }
 
-        p { color: #af0d0d; font-weight: bold; }
-        h6 { color: rgb(0, 4, 255); font-size: large; margin: 20px 0; }
-        
-        .footer-link {
-            text-decoration: none;
-            color: #0055d4;
-            font-weight: bold;
-            display: block;
-            margin-top: 20px;
-        }
-
-        /* إخفاء المحتوى الرئيسي حتى تنتهي شاشة الترحيب */
-        #main-content {
-            display: none;
-        }
+        #main-content { display: none; }
     </style>
 </head>
 
@@ -181,118 +98,80 @@
 
     <div id="splash-screen">
         <div class="ai-loader"></div>
-        <div class="welcome-msg">مرحباً بكم في موقع البحير نت <br> عالم التكنولوجيا والذكاء الاصطناعي</div>
+        <div style="color: #64ffda; margin-top: 20px; font-size: 1.5rem;">مرحب بكم في موقع البحير نت</div>
     </div>
 
     <div id="main-content">
         <div class="contact-container">
             
-            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80" alt="Technology AI" class="header-image">
-
-            <div id="clock-container">
-                <div id="date">جاري التحميل...</div>
-                <div id="time">00:00:00</div>
+            <div class="section-header">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80" class="header-image">
+                <div id="clock-container">
+                    <div id="date">جاري التحميل...</div>
+                    <div id="time">00:00:00</div>
+                </div>
             </div>
 
-            <hr>
-
-            <p>
-                يوفر موقع البحير نت حلول تقنية كاملة في مجال التكنولوجيا ومواقع التواصل الاجتماعية
-                كما يوفر لك الموقع استشارات واجوبة فيما يتعلق مجال البرمجة وامن المعلومات والهاكر الاخلاقي
-                يعمل الموقع 24 ساعة ويواكب تحديثات علي مدار 24 ساعة في تحليل البيانات والخوارزميات لترضي الزوار في معالجة مشاكلهم
-            </p>
-
-            <h6>تم بناء وتصميم الموقع بواسطة المبرمج محمود عصام بهدف تسهيل الخدمات التي تشمل عالم تكنولوجيا الاتصالات وعالم البرمجة والامن المعلوماتي والهكر الاخلاقي وتأمين البيانات ...</h6>
-            
-            <hr>
-
-            <div style="font-size: 0.9rem; color: #555;">
-                |جامعة السودان التقانية|<br>
-                كلية نيالا التقانية, IT<br>
-                <strong>< محمود عصام ></strong>
+            <div class="section-info">
+                <p>
+                    يوفر موقع البحير نت حلول تقنية كاملة في مجال التكنولوجيا ومواقع التواصل الاجتماعية، 
+                    كما يوفر لك الموقع استشارات واجوبة فيما يتعلق بمجال البرمجة وأمن المعلومات.
+                </p>
+                <h6>تصميم المبرمج: محمود عصام</h6>
+                <div style="margin-top: 15px;">
+                    <a href="https://www.facebook.com/profile.php?id=100077831043049" class="fb-link" target="_blank">
+                        لمتابعة مبرمج الموقع علي فيسبوك
+                    </a>
+                </div>
             </div>
 
-            <br>
-            
-            <div style="margin-top: 10px; margin-bottom: 20px;">
-                <a href="https://www.facebook.com/profile.php?id=100077831043049" target="_blank" style="color: #0055d4; text-decoration: underline;">لمتابعة مبرمج الموقع علي فيسبوك</a>
+            <div class="section-form">
+                <form action="https://formsubmit.co/fastfyks@gmail.com" method="post">
+                    <input type="hidden" name="_captcha" value="false">
+                    
+                    <div class="form-group">
+                        <input type="text" name="الاسم الكامل" placeholder="الاسم الكامل" required>
+                    </div>
+
+                    <div class="form-group">
+                        <select name="نوع التواصل" required>
+                            <option value="" disabled selected>اختار نوع تواصلك</option>
+                            <option value="فتح حساب تيك توك">فتح حساب تيك توك</option>
+                            <option value="فتح حساب تيلجرام">فتح حساب تيلجرام</option>
+                            <option value="برمجة شبكات الواي فاي">برمجة شبكات الواي فاي</option>
+                            <option value="استضافة لموقع إلكتروني">استضافة لموقع إلكتروني</option>
+                            <option value="تأمين حسابات التواصل">تأمين حسابات التواصل الاجتماعي</option>
+                            <option value="أمر آخر">أمراً آخر</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <textarea name="الرسالة" rows="4" placeholder="اكتب رسالتك وتتضمن رقم هاتفك..." required></textarea>
+                    </div>
+
+                    <button type="submit">إرسال البيانات</button>
+                </form>
             </div>
 
-            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" alt="Contact Us" style="width: 100%; border-radius: 10px; margin-bottom: 10px;">
-
-            <form action="https://formsubmit.co/fastfyks@gmail.com" method="post">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_template" value="table">
-                <input type="hidden" name="_subject" value="رسالة جديدة!">
-
-                <div class="form-group">
-                    <input type="text" name="الاسم الكامل" placeholder="ادخل الاسم الكامل" required>
-                </div>
-
-                <div class="form-group">
-                    <select name="المشكلة" required>
-                        <option value="" disabled selected>اختار نوع تواصلك</option>
-                        <option value="امرا اخر"> امرا اخر</option>
-                        <option value="برمجة شبكات الواي فاي"> برمجة شبكات الواي فاي</option>
-                        <option value="ربط أنتينا"> ربط أنتينا</option>
-                        <option value="استضافة لموقع إلكتروني">استضافة لموقع إلكتروني</option>
-                        <option value="تم قفل حسابي علي فيسبوك">تم قفل حسابي علي فيسبوك</option>
-                        <option value="تأمين حساب فايسبوك ومواقع التواصل الاجتماعية الاخري">تأمين حساب فيسبوك ومواقع التواصل الاجتماعية الاخري</option>
-                        <option value="انا تقني تكنولوجيا المعلومات واريد شراكة معك"> انا تقني تكنولوجيا المعلومات واريد شراكة معك</option>
-                        <option value="تأكيد حساب الفيسبوك بالبطاقة القومية"> تأكيد حساب فيسبوك بالبطاقة القومية</option>
-                        <option value="فتح حساب واتساب/تويتر/انستغرام">فتح حساب (واتساب/تويتر/انستغرام)</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>اكتب رسالتك داخل المستطيل</label>
-                    <textarea name="الرسالة" rows="4" placeholder="اكتب رسالتك وتتضمن رقم هاتفك..." required></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label>ما تقييمك لخدماتنا؟</label>
-                    <select name="تقييم الخدمات" required>
-                        <option value="" disabled selected>اختر خياراً...</option>
-                        <option value="راضي جدا">راضي جدا</option>
-                        <option value="راضي">راضي</option>
-                        <option value="غير راضي">غير راضي</option>
-                    </select>
-                </div>
-
-                <input type="reset" value="إعادة الاختيار" style="width: auto; background: #eee; border: 1px solid #ccc; cursor: pointer; padding: 5px 10px;">
-                <input type="hidden" name="-success" value="تم ارسال رسالتك بنجاح">
-                
-                <button type="submit">إرسال البيانات</button>
-            </form>
-
-            <hr>
-            <a href="#" class="footer-link">اضغط هنا للرجوع للأعلى</a>
         </div>
     </div>
 
     <script>
-        // دالة تحديث الساعة
         function updateClock() {
             const now = new Date();
             const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            const dateString = now.toLocaleDateString('ar-EG', dateOptions);
-            const timeString = now.toLocaleTimeString('ar-EG');
-            document.getElementById('date').textContent = dateString;
-            document.getElementById('time').textContent = timeString;
+            document.getElementById('date').textContent = now.toLocaleDateString('ar-EG', dateOptions);
+            document.getElementById('time').textContent = now.toLocaleTimeString('ar-EG');
         }
         setInterval(updateClock, 1000);
         updateClock();
 
-        // التحكم في شاشة الترحيب (5 ثواني)
         window.onload = function() {
             setTimeout(function() {
-                const splash = document.getElementById('splash-screen');
-                const main = document.getElementById('main-content');
-                
-                splash.style.opacity = '0';
-                splash.style.visibility = 'hidden';
-                main.style.display = 'block';
-            }, 5000); // 5000 ميلي ثانية = 5 ثواني
+                document.getElementById('splash-screen').style.opacity = '0';
+                document.getElementById('splash-screen').style.visibility = 'hidden';
+                document.getElementById('main-content').style.display = 'block';
+            }, 5000);
         };
     </script>
 
