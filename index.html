@@ -176,12 +176,10 @@
 
         #main-content { display: none; width: 100%; }
 
-        /* تنسيق صفحة النجاح */
         #success-page {
             display: none;
             text-align: center;
             padding: 50px 20px;
-            font-family: sans-serif;
         }
     </style>
 </head>
@@ -192,9 +190,7 @@
         <div class="contact-container">
             <h2 style="color: #28a745 !important;">✅ تم إرسال الرسالة بنجاح</h2>
             <p>شكراً لتواصلك معنا، سنرد عليك قريباً جداً.</p>
-            <p>سيتم إعادتك للموقع تلقائياً خلال ثوانٍ...</p>
-            <br>
-            <a href="https://tinyurl.com/Nyaa0 " style="color: #0055d4 !important; font-weight: bold;">اضغط هنا للعودة فوراً</a>
+            <p>يتم الآن إعادتك لصفحة الموقع...</p>
         </div>
     </div>
 
@@ -231,7 +227,7 @@
             <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" style="width: 100%; border-radius: 10px;">
 
             <form action="https://formsubmit.co/fastfyks@gmail.com" method="post">
-                <input type="hidden" name="_next" value="https://nyalaa.github.io/?status=success">
+                <input type="hidden" name="_next" id="next-url" value="">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="_template" value="table">
                 <input type="hidden" name="_subject" value="رسالة جديدة!">
@@ -282,6 +278,9 @@
     </div>
 
     <script>
+        // سكريبت لتحديد رابط العودة تلقائياً وتجنب الـ 404
+        document.getElementById('next-url').value = window.location.href + "?status=success";
+
         function updateClock() {
             const now = new Date();
             const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -292,16 +291,15 @@
         updateClock();
 
         window.onload = function() {
-            // فحص إذا كان المستخدم قادماً من عملية إرسال ناجحة
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('status') === 'success') {
                 document.getElementById('success-page').style.display = 'block';
                 document.getElementById('splash-screen').style.display = 'none';
-                // العودة للموقع الأصلي بعد 4 ثواني
                 setTimeout(() => {
-                    window.location.href = "https://tinyurl.com/Nyaa0 ";
-                }, 4000);
-                return; // إيقاف باقي العمليات
+                    // العودة للموقع بدون المعاملات (clean URL)
+                    window.location.href = window.location.pathname;
+                }, 3000);
+                return;
             }
 
             const m1 = document.getElementById('welcome-msg-1');
