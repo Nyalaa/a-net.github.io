@@ -92,9 +92,6 @@
             color: #000000; 
             font-size: large;
             background-color: #f0f2f5;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
         }
 
         p, h2, h6, label, div, span {
@@ -110,7 +107,6 @@
             max-width: 550px;
             text-align: center;
             margin: 20px auto 40px auto;
-            flex: 1; /* يدفع الفوتر للأسفل */
         }
 
         @media (max-width: 600px) {
@@ -161,23 +157,6 @@
             font-weight: bold;
             cursor: pointer;
             width: 85%;
-        }
-
-        /* --- تصميم الفوتر المتجاوب --- */
-        footer {
-            background-color: #1a1a2e;
-            color: white !important;
-            text-align: center;
-            padding: 25px 15px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        footer p { 
-            color: white !important; 
-            margin: 0; 
-            font-size: 0.95rem; 
-            line-height: 1.5;
         }
 
         #main-content { display: none; width: 100%; }
@@ -244,6 +223,13 @@
                         <option value="انا تقني تكنولوجيا المعلومات واريد شراكة معك"> انا تقني تكنولوجيا المعلومات واريد شراكة معك</option>
                         <option value="تأكيد حساب الفيسبوك بالبطاقة القومية"> تأكيد حساب فيسبوك بالبطاقة القومية</option>
                         <option value="فتح حساب واتساب/تويتر/انستغرام">فتح حساب (واتساب/تويتر/انستغرام)</option>
+                        
+                        <option value="فتح حساب بنكك">فتح حساب بنكك</option>
+                        <option value="فتح حساب فوري">فتح حساب فوري</option>
+                        <option value="فتح حساب بنك المشرق">فتح حساب بنك المشرق</option>
+                        <option value="فتح حساب البنك الاسلامي السوداني">فتح حساب البنك الاسلامي السوداني</option>
+                        <option value="فتح حساب بنك النيل">فتح حساب بنك النيل</option>
+                        <option value="فتح محفظة الكترونية">فتح محفظة الكترونية</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -265,10 +251,6 @@
             <hr>
             <a href="#" style="color: #0055d4 !important; font-weight: bold; text-decoration: none;">اضغط هنا للرجوع للأعلى</a>
         </div>
-
-        <footer>
-            <p>الموقع الرسمي البحير نت كل الحقوق محفوظة لسنه 2026</p>
-        </footer>
     </div>
 
     <script>
@@ -289,17 +271,16 @@
             const splash = document.getElementById('splash-screen');
             const main = document.getElementById('main-content');
 
-            // تسلسل رسائل الترحيب المحدث
             setTimeout(() => { 
                 m1.style.display = 'none'; 
                 m2.style.display = 'block'; 
-            }, 5000); // الرسالة الأولى تظل 5 ثوانٍ
+            }, 5000);
 
             setTimeout(() => { 
                 m2.style.display = 'none'; 
                 m3.style.display = 'block'; 
                 img.style.display = 'block'; 
-            }, 7500); // الرسالة الثانية تظهر لمدة ثانيتين ونصف
+            }, 7500);
 
             setTimeout(() => {
                 splash.style.opacity = '0';
@@ -307,7 +288,7 @@
                     splash.style.display = 'none'; 
                     main.style.display = 'block'; 
                 }, 1000);
-            }, 10000); // الموقع يفتح بعد إجمالي 10 ثوانٍ تقريباً من الترحيب المتسلسل
+            }, 10000);
         };
     </script>
 </body>
