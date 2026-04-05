@@ -22,7 +22,7 @@
             align-items: center;
             z-index: 9999;
             transition: opacity 1s ease-out, visibility 1s;
-            color: white;
+            color: #ffffff !important; /* التأكد من اللون الأبيض */
             text-align: center;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             padding: 20px;
@@ -59,6 +59,7 @@
             text-shadow: 0 0 15px #0055d4;
             margin: 10px 0;
             display: none; 
+            color: #ffffff !important; /* التأكد من اللون الأبيض قبل الفتح */
         }
 
         #welcome-msg-1 { display: block; animation: pulse 2s infinite; }
@@ -94,7 +95,8 @@
             background-color: #f0f2f5;
         }
 
-        p, h2, h6, label, div, span {
+        /* التعديل لضمان أن نصوص المحتوى الداخلي فقط هي التي تتأثر بالأسود */
+        #main-content p, #main-content h2, #main-content h6, #main-content label, #main-content div, #main-content span {
             color: #000000 !important;
         }
 
@@ -114,7 +116,6 @@
             .welcome-msg { font-size: 1.4rem; }
         }
 
-        /* التعديل: صورة تقنية جديدة بديلة لأول صورتين */
         .tech-main-image {
             width: 100%;
             max-width: 500px;
@@ -161,7 +162,6 @@
             width: 85%;
         }
 
-        /* تنسيق رابط الفيسبوك الجديد */
         .fb-link {
             display: inline-block;
             padding: 10px 20px;
@@ -172,6 +172,7 @@
             font-weight: bold;
             transition: 0.3s;
             border: 1px solid #0055d4;
+            margin-bottom: 10px; /* إضافة مسافة بسيطة */
         }
 
         .fb-link:hover {
@@ -211,6 +212,8 @@
 
             <br>
             <a href="https://www.facebook.com/profile.php?id=100077831043049" target="_blank" class="fb-link">لمتابعة مبرمج الموقع على فيسبوك 🌐</a>
+            <br>
+            <a href="https://www.facebook.com/profile.php?id=61573366409779" target="_blank" class="fb-link">لمتابعة اخبار صفحتنا علي فيسبوك 🌐</a>
             <br><br>
 
             <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" style="width: 100%; border-radius: 10px;">
@@ -229,7 +232,7 @@
                         <option value="امرا اخر"> امرا اخر</option>
                         <option value="برمجة شبكات الواي فاي"> برمجة شبكات الواي فاي</option>
                         <option value="ربط أنتينا"> ربط أنتينا</option>
-                        <option value="استضافة لموقع إلكتروني">استضافة لموقع إلكتروني</option>
+                        <option value="استضافة لموقع إنتيرنيتي">استضافة لموقع إلكتروني</option>
                         <option value="تم قفل حسابي علي فيسبوك">تم قفل حسابي علي فيسبوك</option>
                         <option value="تأمين حساب فايسبوك ومواقع التواصل الاجتماعية الاخري">تأمين حساب فيسبوك ومواقع التواصل الاجتماعية الاخري</option>
                         <option value="انا تقني تكنولوجيا المعلومات واريد شراكة معك"> انا تقني تكنولوجيا المعلومات واريد شراكة معك</option>
