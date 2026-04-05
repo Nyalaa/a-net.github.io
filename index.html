@@ -8,7 +8,7 @@
     <title>البحير نت</title>
 
     <style>
-        /* --- تأثيرات شاشة الترحيب (AI Splash Screen) --- */
+        /* --- تأثيرات شاشة الترحيب الذكية (AI Splash Screen) --- */
         #splash-screen {
             position: fixed;
             top: 0;
@@ -22,6 +22,9 @@
             align-items: center;
             z-index: 9999;
             transition: opacity 1s ease-out, visibility 1s;
+            color: white;
+            text-align: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .ai-loader {
@@ -32,6 +35,7 @@
             border-radius: 50%;
             animation: spin 1.5s linear infinite;
             position: relative;
+            margin-bottom: 20px;
         }
 
         .ai-loader::before {
@@ -50,13 +54,23 @@
         }
 
         .welcome-msg {
-            color: white;
-            margin-top: 20px;
             font-size: 1.8rem;
-            text-align: center;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-shadow: 0 0 15px #0055d4;
-            animation: pulse 2s infinite;
+            margin: 10px 0;
+            display: none; /* مخفية للتبديل بينها */
+        }
+
+        #welcome-msg-1 { display: block; animation: pulse 2s infinite; }
+
+        .success-company-img {
+            width: 80%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 15px;
+            margin-top: 20px;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+            display: none;
+            animation: fadeIn 1s forwards;
         }
 
         @keyframes pulse {
@@ -64,116 +78,98 @@
             50% { opacity: 0.7; transform: scale(1.05); }
         }
 
-        /* --- التنسيقات الأصلية مع تحسينات بسيطة للصور --- */
-        #clock-container {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8f8f8;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            width: fit-content;
-            margin: 20px auto;
-            box-shadow: 0 4px 8px rgba(118, 175, 43, 0.507);
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        #date { color: #0c0909; font-size: 1.2rem; }
-        #time { color: #0055d4; font-size: 2rem; font-weight: bold; display: block; }
-
-        :root {
-            --primary-gradient: linear-gradient(135deg, #e03030c7 0%, #c5131300 100%);
-            --secondary-color: #ffffff;
-            --accent-color: #000000;
-        }
-
+        /* --- التنسيقات الأساسية --- */
         body {
             font-family: Arial, Helvetica, sans-serif;
             margin: 0;
-            padding: 20px;
-            color: #000000;
+            padding: 0;
+            color: #000000; /* تغيير لون النص الكامل بالأسود */
             font-size: large;
             background-color: #f0f2f5;
         }
 
-        /* صورة الهيدر */
-        .header-image {
-            width: 100%;
-            max-width: 300px;
-            height: auto;
-            border-radius: 15px;
-            margin-bottom: 20px;
+        /* توحيد لون جميع النصوص بالأسود */
+        p, h2, h6, label, div, span {
+            color: #000000 !important;
         }
 
         .contact-container {
-            background: var(--secondary-color);
+            background: #ffffff;
             padding: 40px;
             border-radius: 20px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             width: 100%;
             max-width: 550px;
             text-align: center;
-            margin: 0 auto;
+            margin: 20px auto 80px auto; /* هام لترك مساحة للفوتر */
         }
 
-        h2 {
-            color:#e61d1d;
-            margin-bottom: 30px;
-            font-size: 20px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        .header-image, .pre-clock-image {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
+
+        #clock-container {
+            background-color: #f8f8f8;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: fit-content;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #time { color: #0055d4 !important; font-size: 2rem; font-weight: bold; }
 
         .form-group { margin-bottom: 20px; text-align: center; }
-        label { display: block; margin-bottom: 8px; font-weight: bold; color: #000000; }
         
         textarea, input, select {
             width: 90%;
-            padding: 12px 15px;
+            padding: 12px;
             border: 2px solid #979393;
             border-radius: 10px;
             box-sizing: border-box;
-            font-size: 16px;
-            transition: all 0.3s ease;
             outline: none;
-        }
-
-        textarea:focus, input:focus, select:focus {
-            border-color: #0055d4;
-            box-shadow: 0 0 8px rgba(0, 85, 212, 0.3);
+            color: #000000;
         }
 
         button {
             background-color: rgb(0, 116, 231);
-            color: white;
+            color: white !important;
             border: none;
             padding: 15px 30px;
             border-radius: 10px;
-            font-size: large;
             font-weight: bold;
             cursor: pointer;
             width: 80%;
-            transition: transform 0.2s, box-shadow 0.2s;
-            margin-top: 15px;
         }
 
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        /* --- تصميم الفوتر الجديد --- */
+        footer {
+            background-color: #1a1a2e;
+            color: white !important;
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            font-size: 1rem;
+            margin-top: 40px;
         }
 
-        p { color: #af0d0d; font-weight: bold; }
-        h6 { color: rgb(0, 4, 255); font-size: large; margin: 20px 0; }
-        
-        .footer-link {
-            text-decoration: none;
-            color: #0055d4;
-            font-weight: bold;
-            display: block;
-            margin-top: 20px;
-        }
+        footer p { color: white !important; margin: 0; }
 
-        /* إخفاء المحتوى الرئيسي حتى تنتهي شاشة الترحيب */
-        #main-content {
-            display: none;
-        }
+        #main-content { display: none; }
     </style>
 </head>
 
@@ -181,13 +177,19 @@
 
     <div id="splash-screen">
         <div class="ai-loader"></div>
-        <div class="welcome-msg">مرحباً بكم في موقع البحير نت <br> عالم التكنولوجيا والذكاء الاصطناعي</div>
+        <div class="welcome-msg-container">
+            <div id="welcome-msg-1" class="welcome-msg">مرحباً بكم في موقع البحير نت <br> عالم التكنولوجيا والذكاء الاصطناعي</div>
+            <div id="welcome-msg-2" class="welcome-msg">نسعى دائماً لتقديم الأفضل لكم في عالم البرمجة</div>
+            <div id="thanks-msg" class="welcome-msg">شكرآ لصبرك ايها الزائر</div>
+            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80" alt="Success" class="success-company-img" id="success-img">
+        </div>
     </div>
 
     <div id="main-content">
         <div class="contact-container">
-            
-            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80" alt="Technology AI" class="header-image">
+            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80" class="header-image">
+
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" class="pre-clock-image">
 
             <div id="clock-container">
                 <div id="date">جاري التحميل...</div>
@@ -195,30 +197,21 @@
             </div>
 
             <hr>
-
-            <p>
-                يوفر موقع البحير نت حلول تقنية كاملة في مجال التكنولوجيا ومواقع التواصل الاجتماعية
-                كما يوفر لك الموقع استشارات واجوبة فيما يتعلق مجال البرمجة وامن المعلومات والهاكر الاخلاقي
-                يعمل الموقع 24 ساعة ويواكب تحديثات علي مدار 24 ساعة في تحليل البيانات والخوارزميات لترضي الزوار في معالجة مشاكلهم
-            </p>
-
-            <h6>تم بناء وتصميم الموقع بواسطة المبرمج محمود عصام بهدف تسهيل الخدمات التي تشمل عالم تكنولوجيا الاتصالات وعالم البرمجة والامن المعلوماتي والهكر الاخلاقي وتأمين البيانات ...</h6>
-            
+            <p>يوفر موقع البحير نت حلول تقنية كاملة في مجال التكنولوجيا ومواقع التواصل الاجتماعية...</p>
+            <h6 style="font-weight: bold;">تم بناء وتصميم الموقع بواسطة المبرمج محمود عصام...</h6>
             <hr>
 
-            <div style="font-size: 0.9rem; color: #555;">
+            <div style="font-size: 0.9rem;">
                 |جامعة السودان التقانية|<br>
                 كلية نيالا التقانية, IT<br>
-                <strong>< محمود عصام ></strong>
+                <strong>&lt; محمود عصام &gt;</strong>
             </div>
 
             <br>
-            
-            <div style="margin-top: 10px; margin-bottom: 20px;">
-                <a href="https://www.facebook.com/profile.php?id=100077831043049" target="_blank" style="color: #0055d4; text-decoration: underline;">لمتابعة مبرمج الموقع علي فيسبوك</a>
-            </div>
+            <a href="https://www.facebook.com/profile.php?id=100077831043049" target="_blank" style="color: #0055d4 !important; text-decoration: underline;">لمتابعة مبرمج الموقع علي فيسبوك</a>
+            <br><br>
 
-            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" alt="Contact Us" style="width: 100%; border-radius: 10px; margin-bottom: 10px;">
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" style="width: 100%; border-radius: 10px;">
 
             <form action="https://formsubmit.co/fastfyks@gmail.com" method="post">
                 <input type="hidden" name="_captcha" value="false">
@@ -228,7 +221,6 @@
                 <div class="form-group">
                     <input type="text" name="الاسم الكامل" placeholder="ادخل الاسم الكامل" required>
                 </div>
-
                 <div class="form-group">
                     <select name="المشكلة" required>
                         <option value="" disabled selected>اختار نوع تواصلك</option>
@@ -243,12 +235,10 @@
                         <option value="فتح حساب واتساب/تويتر/انستغرام">فتح حساب (واتساب/تويتر/انستغرام)</option>
                     </select>
                 </div>
-
                 <div class="form-group">
                     <label>اكتب رسالتك داخل المستطيل</label>
-                    <textarea name="الرسالة" rows="4" placeholder="اكتب رسالتك وتتضمن رقم هاتفك..." required></textarea>
+                    <textarea name="الرسالة" rows="4" placeholder="اكتب رسالتك..." required></textarea>
                 </div>
-
                 <div class="form-group">
                     <label>ما تقييمك لخدماتنا؟</label>
                     <select name="تقييم الخدمات" required>
@@ -258,43 +248,44 @@
                         <option value="غير راضي">غير راضي</option>
                     </select>
                 </div>
-
-                <input type="reset" value="إعادة الاختيار" style="width: auto; background: #eee; border: 1px solid #ccc; cursor: pointer; padding: 5px 10px;">
-                <input type="hidden" name="-success" value="تم ارسال رسالتك بنجاح">
-                
                 <button type="submit">إرسال البيانات</button>
             </form>
 
             <hr>
-            <a href="#" class="footer-link">اضغط هنا للرجوع للأعلى</a>
+            <a href="#" style="color: #0055d4 !important; font-weight: bold; text-decoration: none;">اضغط هنا للرجوع للأعلى</a>
         </div>
+
+        <footer>
+            <p>الموقع الرسمي البحير نت كل الحقوق محفوظة لسنه 2026</p>
+        </footer>
     </div>
 
     <script>
-        // دالة تحديث الساعة
         function updateClock() {
             const now = new Date();
             const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            const dateString = now.toLocaleDateString('ar-EG', dateOptions);
-            const timeString = now.toLocaleTimeString('ar-EG');
-            document.getElementById('date').textContent = dateString;
-            document.getElementById('time').textContent = timeString;
+            document.getElementById('date').textContent = now.toLocaleDateString('ar-EG', dateOptions);
+            document.getElementById('time').textContent = now.toLocaleTimeString('ar-EG');
         }
         setInterval(updateClock, 1000);
         updateClock();
 
-        // التحكم في شاشة الترحيب (5 ثواني)
         window.onload = function() {
-            setTimeout(function() {
-                const splash = document.getElementById('splash-screen');
-                const main = document.getElementById('main-content');
-                
+            const m1 = document.getElementById('welcome-msg-1');
+            const m2 = document.getElementById('welcome-msg-2');
+            const m3 = document.getElementById('thanks-msg');
+            const img = document.getElementById('success-img');
+            const splash = document.getElementById('splash-screen');
+            const main = document.getElementById('main-content');
+
+            // تسلسل رسائل الترحيب
+            setTimeout(() => { m1.style.display = 'none'; m2.style.display = 'block'; }, 2000);
+            setTimeout(() => { m2.style.display = 'none'; m3.style.display = 'block'; img.style.display = 'block'; }, 4000);
+            setTimeout(() => {
                 splash.style.opacity = '0';
-                splash.style.visibility = 'hidden';
-                main.style.display = 'block';
-            }, 5000); // 5000 ميلي ثانية = 5 ثواني
+                setTimeout(() => { splash.style.display = 'none'; main.style.display = 'block'; }, 1000);
+            }, 7000);
         };
     </script>
-
 </body>
 </html>
