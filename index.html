@@ -114,7 +114,8 @@
             .welcome-msg { font-size: 1.4rem; }
         }
 
-        .header-image, .pre-clock-image {
+        /* التعديل: صورة تقنية جديدة بديلة لأول صورتين */
+        .tech-main-image {
             width: 100%;
             max-width: 500px;
             border-radius: 15px;
@@ -122,6 +123,7 @@
             display: block;
             margin-left: auto;
             margin-right: auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         #clock-container {
@@ -159,6 +161,24 @@
             width: 85%;
         }
 
+        /* تنسيق رابط الفيسبوك الجديد */
+        .fb-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #f0f2f5;
+            color: #0055d4 !important;
+            text-decoration: none !important;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: 0.3s;
+            border: 1px solid #0055d4;
+        }
+
+        .fb-link:hover {
+            background-color: #0055d4;
+            color: white !important;
+        }
+
         #main-content { display: none; width: 100%; }
     </style>
 </head>
@@ -177,9 +197,7 @@
 
     <div id="main-content">
         <div class="contact-container">
-            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80" class="header-image">
-
-            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" class="pre-clock-image">
+            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80" class="tech-main-image" alt="Tech Solutions">
 
             <div id="clock-container">
                 <div id="date">جاري التحميل...</div>
@@ -191,14 +209,8 @@
             <h6 style="font-weight: bold;">تم بناء وتصميم الموقع بواسطة المبرمج محمود عصام...</h6>
             <hr>
 
-            <div style="font-size: 0.9rem;">
-                |جامعة السودان التقانية|<br>
-                كلية نيالا التقانية, IT<br>
-                <strong>&lt; محمود عصام &gt;</strong>
-            </div>
-
             <br>
-            <a href="https://www.facebook.com/profile.php?id=100077831043049" target="_blank" style="color: #0055d4 !important; text-decoration: underline;">لمتابعة مبرمج الموقع علي فيسبوك</a>
+            <a href="https://www.facebook.com/profile.php?id=100077831043049" target="_blank" class="fb-link">لمتابعة مبرمج الموقع على فيسبوك 🌐</a>
             <br><br>
 
             <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" style="width: 100%; border-radius: 10px;">
