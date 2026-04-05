@@ -8,152 +8,172 @@
     <title>البحير نت</title>
 
     <style>
-        /* --- شاشة الترحيب الذكية --- */
+        /* --- تأثيرات شاشة الترحيب (AI Splash Screen) --- */
         #splash-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, #003366 0%, #000000 100%);
+            background: radial-gradient(circle at center, #1a1a2e 0%, #000000 100%);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            transition: opacity 0.8s ease;
+            transition: opacity 1s ease-out, visibility 1s;
         }
 
         .ai-loader {
-            width: 90px;
-            height: 90px;
-            border: 5px solid rgba(255, 255, 255, 0.1);
-            border-top-color: #00d4ff;
+            width: 100px;
+            height: 100px;
+            border: 3px solid transparent;
+            border-top-color: #0055d4;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
+            animation: spin 1.5s linear infinite;
+            position: relative;
         }
 
-        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .ai-loader::before {
+            content: "";
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 3px solid transparent;
+            border-top-color: #ff0606;
+            border-radius: 50%;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
         .welcome-msg {
             color: white;
-            margin-top: 25px;
-            font-size: 2rem;
+            margin-top: 20px;
+            font-size: 1.8rem;
             text-align: center;
-            font-family: 'Segoe UI', sans-serif;
-            text-shadow: 0 0 20px #00d4ff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-shadow: 0 0 15px #0055d4;
+            animation: pulse 2s infinite;
         }
 
-        /* --- تنسيق الخلفية الزرقاء الجديدة --- */
-        body {
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.05); }
+        }
+
+        /* --- التنسيقات الأصلية مع تحسينات بسيطة للصور --- */
+        #clock-container {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f8f8;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: fit-content;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(118, 175, 43, 0.507);
+        }
+
+        #date { color: #0c0909; font-size: 1.2rem; }
+        #time { color: #0055d4; font-size: 2rem; font-weight: bold; display: block; }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #e03030c7 0%, #c5131300 100%);
+            --secondary-color: #ffffff;
+            --accent-color: #000000;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
             margin: 0;
             padding: 20px;
-            color: #ffffff;
-            background: linear-gradient(135deg, #002244 0%, #004488 100%); /* خلفية زرقاء احترافية */
-            min-height: 100vh;
-            line-height: 1.8;
+            color: #000000;
+            font-size: large;
+            background-color: #f0f2f5;
+        }
+
+        /* صورة الهيدر */
+        .header-image {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 15px;
+            margin-bottom: 20px;
         }
 
         .contact-container {
-            background: rgba(255, 255, 255, 0.1); 
-            backdrop-filter: blur(15px);
+            background: var(--secondary-color);
             padding: 40px;
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             width: 100%;
-            max-width: 600px;
+            max-width: 550px;
             text-align: center;
             margin: 0 auto;
-            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        /* تنسيق الساعة */
-        #clock-container {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        h2 {
+            color:#e61d1d;
+            margin-bottom: 30px;
+            font-size: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
-        #date { color: #1a365d; font-size: 1.3rem; font-weight: 600; }
-        #time { color: #0055d4; font-size: 2.5rem; font-weight: bold; display: block; }
-
-        /* تكبير النصوص وتوضيحها */
-        p { 
-            font-size: 1.3rem; 
-            color: #f0f7ff; 
-            margin-bottom: 20px; 
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-
-        h6 { 
-            color: #82ccff; 
-            font-size: 1.4rem; 
-            margin: 20px 0;
-            background: rgba(0,0,0,0.2);
-            padding: 10px;
+        .form-group { margin-bottom: 20px; text-align: center; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; color: #000000; }
+        
+        textarea, input, select {
+            width: 90%;
+            padding: 12px 15px;
+            border: 2px solid #979393;
             border-radius: 10px;
-        }
-
-        .info-box { margin-bottom: 30px; }
-
-        /* تنسيق النموذج */
-        .form-box {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 12px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            background: rgba(0, 0, 0, 0.3);
-            color: #fff;
-            font-size: 1.1rem;
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: all 0.3s ease;
             outline: none;
         }
 
-        input:focus, select:focus, textarea:focus {
-            border-color: #00d4ff;
-            background: rgba(0, 0, 0, 0.5);
+        textarea:focus, input:focus, select:focus {
+            border-color: #0055d4;
+            box-shadow: 0 0 8px rgba(0, 85, 212, 0.3);
         }
 
         button {
-            background: #00d4ff;
-            color: #002244;
+            background-color: rgb(0, 116, 231);
+            color: white;
             border: none;
-            padding: 18px;
-            border-radius: 12px;
-            font-size: 1.4rem;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: large;
             font-weight: bold;
             cursor: pointer;
-            width: 100%;
-            transition: 0.3s;
+            width: 80%;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 15px;
         }
 
         button:hover {
-            background: #ffffff;
-            transform: translateY(-3px);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
-        .fb-link {
-            text-decoration: none !important;
-            color: #ffffff;
-            background: #1877f2;
-            padding: 10px 20px;
-            border-radius: 50px;
-            display: inline-block;
-            font-size: 1.1rem;
-            margin-top: 10px;
+        p { color: #af0d0d; font-weight: bold; }
+        h6 { color: rgb(0, 4, 255); font-size: large; margin: 20px 0; }
+        
+        .footer-link {
+            text-decoration: none;
+            color: #0055d4;
+            font-weight: bold;
+            display: block;
+            margin-top: 20px;
         }
 
-        #main-content { display: none; }
+        /* إخفاء المحتوى الرئيسي حتى تنتهي شاشة الترحيب */
+        #main-content {
+            display: none;
+        }
     </style>
 </head>
 
@@ -161,90 +181,118 @@
 
     <div id="splash-screen">
         <div class="ai-loader"></div>
-        <div id="splash-text" class="welcome-msg">مرحباً بكم في موقع البحير نت <br> عالم التكنولوجيا والذكاء الاصطناعي</div>
+        <div class="welcome-msg">مرحباً بكم في موقع البحير نت <br> عالم التكنولوجيا والذكاء الاصطناعي</div>
     </div>
 
     <div id="main-content">
         <div class="contact-container">
             
+            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80" alt="Technology AI" class="header-image">
+
             <div id="clock-container">
                 <div id="date">جاري التحميل...</div>
                 <div id="time">00:00:00</div>
             </div>
 
-            <div class="info-box">
-                <p>يوفر موقع البحير نت حلول تقنية كاملة في مجال التكنولوجيا ومواقع التواصل الاجتماعية واستشارات البرمجة والأمن المعلوماتي.</p>
-                <h6>تصميم وإدارة: المبرمج محمود عصام</h6>
-                <div style="font-size: 1rem; color: #cbd5e1; margin-bottom: 15px;">| جامعة السودان التقانية - كلية نيالا |</div>
-                <a href="https://www.facebook.com/profile.php?id=100077831043049" target="_blank" class="fb-link">لمتابعة المبرمج على فيسبوك</a>
+            <hr>
+
+            <p>
+                يوفر موقع البحير نت حلول تقنية كاملة في مجال التكنولوجيا ومواقع التواصل الاجتماعية
+                كما يوفر لك الموقع استشارات واجوبة فيما يتعلق مجال البرمجة وامن المعلومات والهاكر الاخلاقي
+                يعمل الموقع 24 ساعة ويواكب تحديثات علي مدار 24 ساعة في تحليل البيانات والخوارزميات لترضي الزوار في معالجة مشاكلهم
+            </p>
+
+            <h6>تم بناء وتصميم الموقع بواسطة المبرمج محمود عصام بهدف تسهيل الخدمات التي تشمل عالم تكنولوجيا الاتصالات وعالم البرمجة والامن المعلوماتي والهكر الاخلاقي وتأمين البيانات ...</h6>
+            
+            <hr>
+
+            <div style="font-size: 0.9rem; color: #555;">
+                |جامعة السودان التقانية|<br>
+                كلية نيالا التقانية, IT<br>
+                <strong>< محمود عصام ></strong>
             </div>
 
-            <div class="form-box">
-                <form action="https://formsubmit.co/fastfyks@gmail.com" method="post">
-                    <input type="hidden" name="_captcha" value="false">
-                    
-                    <input type="text" name="الاسم الكامل" placeholder="أدخل اسمك الكامل هنا" required>
-                    
+            <br>
+            
+            <div style="margin-top: 10px; margin-bottom: 20px;">
+                <a href="https://www.facebook.com/profile.php?id=100077831043049" target="_blank" style="color: #0055d4; text-decoration: underline;">لمتابعة مبرمج الموقع علي فيسبوك</a>
+            </div>
+
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" alt="Contact Us" style="width: 100%; border-radius: 10px; margin-bottom: 10px;">
+
+            <form action="https://formsubmit.co/fastfyks@gmail.com" method="post">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_subject" value="رسالة جديدة!">
+
+                <div class="form-group">
+                    <input type="text" name="الاسم الكامل" placeholder="ادخل الاسم الكامل" required>
+                </div>
+
+                <div class="form-group">
                     <select name="المشكلة" required>
-                        <option value="" disabled selected>ما هو نوع تواصلك؟</option>
-                        <option value="فتح حساب تيك توك">فتح حساب تيك توك</option>
-                        <option value="فتح حساب تيلجرام">فتح حساب تيلجرام</option>
-                        <option value="برمجة شبكات الواي فاي">برمجة شبكات الواي فاي</option>
-                        <option value="تأمين حسابات التواصل">تأمين حسابات التواصل</option>
-                        <option value="شراكة تقنية">أنا تقني وأريد شراكة معك</option>
-                        <option value="فتح حساب واتساب/تويتر">فتح حساب (واتساب/تويتر)</option>
-                        <option value="أمراً آخر">أمراً آخر</option>
+                        <option value="" disabled selected>اختار نوع تواصلك</option>
+                        <option value="امرا اخر"> امرا اخر</option>
+                        <option value="برمجة شبكات الواي فاي"> برمجة شبكات الواي فاي</option>
+                        <option value="ربط أنتينا"> ربط أنتينا</option>
+                        <option value="استضافة لموقع إلكتروني">استضافة لموقع إلكتروني</option>
+                        <option value="تم قفل حسابي علي فيسبوك">تم قفل حسابي علي فيسبوك</option>
+                        <option value="تأمين حساب فايسبوك ومواقع التواصل الاجتماعية الاخري">تأمين حساب فيسبوك ومواقع التواصل الاجتماعية الاخري</option>
+                        <option value="انا تقني تكنولوجيا المعلومات واريد شراكة معك"> انا تقني تكنولوجيا المعلومات واريد شراكة معك</option>
+                        <option value="تأكيد حساب الفيسبوك بالبطاقة القومية"> تأكيد حساب فيسبوك بالبطاقة القومية</option>
+                        <option value="فتح حساب واتساب/تويتر/انستغرام">فتح حساب (واتساب/تويتر/انستغرام)</option>
                     </select>
+                </div>
 
-                    <textarea name="الرسالة" rows="4" placeholder="اكتب رسالتك مع رقم الهاتف..." required></textarea>
+                <div class="form-group">
+                    <label>اكتب رسالتك داخل المستطيل</label>
+                    <textarea name="الرسالة" rows="4" placeholder="اكتب رسالتك وتتضمن رقم هاتفك..." required></textarea>
+                </div>
 
-                    <label style="display:block; margin-bottom:10px;">تقييمك لخدماتنا:</label>
-                    <select name="التقييم" required>
-                        <option value="ممتاز">ممتاز جداً</option>
+                <div class="form-group">
+                    <label>ما تقييمك لخدماتنا؟</label>
+                    <select name="تقييم الخدمات" required>
+                        <option value="" disabled selected>اختر خياراً...</option>
+                        <option value="راضي جدا">راضي جدا</option>
                         <option value="راضي">راضي</option>
                         <option value="غير راضي">غير راضي</option>
                     </select>
+                </div>
 
-                    <button type="submit">إرسال البيانات الآن</button>
-                </form>
-            </div>
+                <input type="reset" value="إعادة الاختيار" style="width: auto; background: #eee; border: 1px solid #ccc; cursor: pointer; padding: 5px 10px;">
+                <input type="hidden" name="-success" value="تم ارسال رسالتك بنجاح">
+                
+                <button type="submit">إرسال البيانات</button>
+            </form>
 
-            <a href="#" style="color: #82ccff; text-decoration: none; display: block; margin-top: 25px; font-size: 1.1rem;">الرجوع للأعلى ▲</a>
+            <hr>
+            <a href="#" class="footer-link">اضغط هنا للرجوع للأعلى</a>
         </div>
     </div>
 
     <script>
-        // تحديث الساعة
+        // دالة تحديث الساعة
         function updateClock() {
             const now = new Date();
             const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('date').textContent = now.toLocaleDateString('ar-EG', dateOptions);
-            document.getElementById('time').textContent = now.toLocaleTimeString('ar-EG');
+            const dateString = now.toLocaleDateString('ar-EG', dateOptions);
+            const timeString = now.toLocaleTimeString('ar-EG');
+            document.getElementById('date').textContent = dateString;
+            document.getElementById('time').textContent = timeString;
         }
         setInterval(updateClock, 1000);
         updateClock();
 
-        // نظام شاشة الترحيب المطور
+        // التحكم في شاشة الترحيب (5 ثواني)
         window.onload = function() {
-            const splashText = document.getElementById('splash-text');
-            const splashScreen = document.getElementById('splash-screen');
-            const mainContent = document.getElementById('main-content');
-
-            // بعد 5 ثوانٍ، تغيير النص
             setTimeout(function() {
-                splashText.innerHTML = "شكراً لإنتظارك أيها الزائر 😊";
-                splashText.style.color = "#00d4ff";
+                const splash = document.getElementById('splash-screen');
+                const main = document.getElementById('main-content');
                 
-                // بعد ثانية واحدة إضافية من ظهور الرسالة الجديدة، يفتح الموقع
-                setTimeout(function() {
-                    splashScreen.style.opacity = '0';
-                    setTimeout(() => {
-                        splashScreen.style.display = 'none';
-                        mainContent.style.display = 'block';
-                    }, 800);
-                }, 1500); 
-
-            }, 5000); 
+                splash.style.opacity = '0';
+                splash.style.visibility = 'hidden';
+                main.style.display = 'block';
+            }, 5000); // 5000 ميلي ثانية = 5 ثواني
         };
     </script>
 
