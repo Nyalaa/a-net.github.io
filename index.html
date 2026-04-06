@@ -95,10 +95,6 @@
             background-color: #f0f2f5;
         }
 
-        #main-content p, #main-content h2, #main-content h6, #main-content label, #main-content div, #main-content span {
-            color: #000000 !important;
-        }
-
         .contact-container {
             background: #ffffff;
             padding: 40px;
@@ -176,23 +172,25 @@
 
         #main-content { display: none; width: 100%; }
 
-        #success-page {
+        /* تعديل تصميم رسالة النجاح */
+        #success-section {
             display: none;
             text-align: center;
-            padding: 50px 20px;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #0055d4;
+            font-weight: bold;
+            text-decoration: underline;
+            cursor: pointer;
         }
     </style>
 </head>
 
 <body>
-
-    <div id="success-page">
-        <div class="contact-container">
-            <h2 style="color: #28a745 !important;">✅ تم إرسال الرسالة بنجاح</h2>
-            <p>شكراً لتواصلك معنا، سنرد عليك قريباً جداً.</p>
-            <p>يتم الآن إعادتك لصفحة الموقع...</p>
-        </div>
-    </div>
 
     <div id="splash-screen">
         <div class="ai-loader"></div>
@@ -224,53 +222,58 @@
             <a href="https://www.facebook.com/profile.php?id=61573366409779" target="_blank" class="fb-link">لمتابعة اخبار صفحتنا علي فيسبوك 🌐</a>
             <br><br>
 
-            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" style="width: 100%; border-radius: 10px;">
+            <div id="form-section">
+                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" style="width: 100%; border-radius: 10px; margin-bottom: 15px;">
+                
+                <form id="contact-form">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_subject" value="رسالة جديدة!">
 
-            <form action="https://formsubmit.co/fastfyks@gmail.com" method="post">
-                <input type="hidden" name="_next" id="next-url" value="">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_template" value="table">
-                <input type="hidden" name="_subject" value="رسالة جديدة!">
+                    <div class="form-group">
+                        <input type="text" name="الاسم الكامل" placeholder="ادخل الاسم الكامل" required>
+                    </div>
+                    <div class="form-group">
+                        <select name="المشكلة" required>
+                            <option value="" disabled selected>اختار نوع تواصلك</option>
+                            <option value="امرا اخر"> امرا اخر</option>
+                            <option value="برمجة شبكات الواي فاي"> برمجة شبكات الواي فاي</option>
+                            <option value="ربط أنتينا"> ربط أنتينا</option>
+                            <option value="استضافة لموقع إلكتروني">استضافة لموقع إلكتروني</option>
+                            <option value="تم قفل حسابي علي فيسبوك">تم قفل حسابي علي فيسبوك</option>
+                            <option value="تأمين حساب فيسبوك">تأمين حساب فيسبوك ومواقع التواصل الاجتماعية الاخري</option>
+                            <option value="شراكة تقنية"> انا تقني تكنولوجيا المعلومات واريد شراكة معك</option>
+                            <option value="تأكيد حساب بالبطاقة"> تأكيد حساب فيسبوك بالبطاقة القومية</option>
+                            <option value="فتح حسابات تواصل">فتح حساب (واتساب/تويتر/انستغرام)</option>
+                            <option value="فتح حساب بنكك">فتح حساب بنكك</option>
+                            <option value="فتح حساب فوري">فتح حساب فوري</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>اكتب رسالتك داخل المستطيل</label>
+                        <textarea name="الرسالة" rows="4" placeholder="اكتب رسالتك..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>ما تقييمك لخدماتنا؟</label>
+                        <select name="تقييم الخدمات" required>
+                            <option value="" disabled selected>اختر خياراً...</option>
+                            <option value="راضي جدا">راضي جدا</option>
+                            <option value="راضي">راضي</option>
+                            <option value="غير راضي">غير راضي</option>
+                        </select>
+                    </div>
+                    <button type="submit" id="submit-button">إرسال البيانات</button>
+                </form>
+            </div>
 
-                <div class="form-group">
-                    <input type="text" name="الاسم الكامل" placeholder="ادخل الاسم الكامل" required>
+            <div id="success-section">
+                <div style="padding: 30px; background: #f8fff9; border: 2px solid #28a745; border-radius: 15px;">
+                    <h2 style="color: #28a745 !important; margin-bottom: 10px;">✅ تم إرسال رسالتك بنجاح</h2>
+                    <p style="color: #333 !important;">شكراً لتواصلك معنا، مبرمج الموقع محمود عصام سيقوم بالرد عليك في أقرب وقت.</p>
+                    <hr>
+                    <a href="javascript:void(0)" onclick="location.reload()" class="back-link">إن كنت تريد الرجوع الي الموقع اضغط هنا</a>
                 </div>
-                <div class="form-group">
-                    <select name="المشكلة" required>
-                        <option value="" disabled selected>اختار نوع تواصلك</option>
-                        <option value="امرا اخر"> امرا اخر</option>
-                        <option value="برمجة شبكات الواي فاي"> برمجة شبكات الواي فاي</option>
-                        <option value="ربط أنتينا"> ربط أنتينا</option>
-                        <option value="استضافة لموقع إنتيرنيتي">استضافة لموقع إلكتروني</option>
-                        <option value="تم قفل حسابي علي فيسبوك">تم قفل حسابي علي فيسبوك</option>
-                        <option value="تأمين حساب فايسبوك ومواقع التواصل الاجتماعية الاخري">تأمين حساب فيسبوك ومواقع التواصل الاجتماعية الاخري</option>
-                        <option value="انا تقني تكنولوجيا المعلومات واريد شراكة معك"> انا تقني تكنولوجيا المعلومات واريد شراكة معك</option>
-                        <option value="تأكيد حساب الفيسبوك بالبطاقة القومية"> تأكيد حساب فيسبوك بالبطاقة القومية</option>
-                        <option value="فتح حساب واتساب/تويتر/انستغرام">فتح حساب (واتساب/تويتر/انستغرام)</option>
-                        
-                        <option value="فتح حساب بنكك">فتح حساب بنكك</option>
-                        <option value="فتح حساب فوري">فتح حساب فوري</option>
-                        <option value="فتح حساب بنك المشرق">فتح حساب بنك المشرق</option>
-                        <option value="فتح حساب البنك الاسلامي السوداني">فتح حساب البنك الاسلامي السوداني</option>
-                        <option value="فتح حساب بنك النيل">فتح حساب بنك النيل</option>
-                        <option value="فتح محفظة الكترونية">فتح محفظة الكترونية</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>اكتب رسالتك داخل المستطيل</label>
-                    <textarea name="الرسالة" rows="4" placeholder="اكتب رسالتك..." required></textarea>
-                </div>
-                <div class="form-group">
-                    <label>ما تقييمك لخدماتنا؟</label>
-                    <select name="تقييم الخدمات" required>
-                        <option value="" disabled selected>اختر خياراً...</option>
-                        <option value="راضي جدا">راضي جدا</option>
-                        <option value="راضي">راضي</option>
-                        <option value="غير راضي">غير راضي</option>
-                    </select>
-                </div>
-                <button type="submit">إرسال البيانات</button>
-            </form>
+            </div>
 
             <hr>
             <a href="#" style="color: #0055d4 !important; font-weight: bold; text-decoration: none;">اضغط هنا للرجوع للأعلى</a>
@@ -278,9 +281,7 @@
     </div>
 
     <script>
-        // سكريبت لتحديد رابط العودة تلقائياً وتجنب الـ 404
-        document.getElementById('next-url').value = window.location.href + "?status=success";
-
+        // تحديث الساعة والتاريخ
         function updateClock() {
             const now = new Date();
             const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -290,18 +291,8 @@
         setInterval(updateClock, 1000);
         updateClock();
 
+        // التحكم في شاشة الترحيب
         window.onload = function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('status') === 'success') {
-                document.getElementById('success-page').style.display = 'block';
-                document.getElementById('splash-screen').style.display = 'none';
-                setTimeout(() => {
-                    // العودة للموقع بدون المعاملات (clean URL)
-                    window.location.href = window.location.pathname;
-                }, 3000);
-                return;
-            }
-
             const m1 = document.getElementById('welcome-msg-1');
             const m2 = document.getElementById('welcome-msg-2');
             const m3 = document.getElementById('thanks-msg');
@@ -309,25 +300,53 @@
             const splash = document.getElementById('splash-screen');
             const main = document.getElementById('main-content');
 
-            setTimeout(() => { 
-                m1.style.display = 'none'; 
-                m2.style.display = 'block'; 
-            }, 5000);
-
-            setTimeout(() => { 
-                m2.style.display = 'none'; 
-                m3.style.display = 'block'; 
-                img.style.display = 'block'; 
-            }, 7500);
-
+            setTimeout(() => { m1.style.display = 'none'; m2.style.display = 'block'; }, 4000);
+            setTimeout(() => { m2.style.display = 'none'; m3.style.display = 'block'; img.style.display = 'block'; }, 7000);
             setTimeout(() => {
                 splash.style.opacity = '0';
-                setTimeout(() => { 
-                    splash.style.display = 'none'; 
-                    main.style.display = 'block'; 
-                }, 1000);
-            }, 10000);
+                setTimeout(() => { splash.style.display = 'none'; main.style.display = 'block'; }, 1000);
+            }, 9500);
         };
+
+        // معالجة إرسال النموذج بدون تحديث الصفحة
+        const contactForm = document.getElementById('contact-form');
+        const formSection = document.getElementById('form-section');
+        const successSection = document.getElementById('success-section');
+        const submitBtn = document.getElementById('submit-button');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // منع التحديث والرجوع التلقائي
+            
+            submitBtn.disabled = true;
+            submitBtn.innerText = "جاري الإرسال...";
+
+            const formData = new FormData(contactForm);
+            
+            // إرسال البيانات باستخدام Fetch لضمان عدم مغادرة الصفحة
+            fetch("https://formsubmit.co/ajax/fastfyks@gmail.com", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    formSection.style.display = 'none'; // إخفاء النموذج
+                    successSection.style.display = 'block'; // إظهار رسالة النجاح الثابتة
+                    window.scrollTo(0, 0); // رفع الصفحة للأعلى لمشاهدة الرسالة
+                } else {
+                    alert("عذراً، حدث خطأ أثناء الإرسال. حاول مرة أخرى.");
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "إرسال البيانات";
+                }
+            })
+            .catch(error => {
+                alert("تأكد من اتصالك بالإنترنت وحاول مجدداً.");
+                submitBtn.disabled = false;
+                submitBtn.innerText = "إرسال البيانات";
+            });
+        });
     </script>
 </body>
 </html>
