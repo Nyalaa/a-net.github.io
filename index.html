@@ -8,7 +8,7 @@
     <title>البحير نت</title>
 
     <style>
-        /* --- تأثيرات شاشة الترحيب الذكية المعدلة --- */
+        /* --- تأثيرات شاشة الترحيب الذكية (AI Splash Screen) --- */
         #splash-screen {
             position: fixed;
             top: 0;
@@ -28,33 +28,17 @@
             padding: 20px;
         }
 
-        /* حاوية الرسائل لتكون في المنتصف وبحجم مناسب */
-        .welcome-msg-container {
-            max-width: 80%;
-            margin: 0 auto;
-        }
-
-        .welcome-msg {
-            font-size: 1.8rem;
-            margin: 10px 0;
-            display: none; 
-            /* تأثير لمعان وتغيير ألوان النص */
-            background: linear-gradient(to right, #ffffff, #0055d4, #ff0606, #ffffff);
-            background-size: 200% auto;
-            color: #fff;
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shine 3s linear infinite;
-            font-weight: bold;
-        }
-
-        @keyframes shine {
-            to { background-position: 200% center; }
+        /* تنسيق العلم السوداني */
+        #sudan-flag {
+            width: 120px;
+            height: 80px;
+            margin-bottom: 20px;
+            display: block;
+            animation: fadeInOut 3s forwards;
         }
 
         .ai-loader {
-            width: 80px;
+            width: 80px; /* تم تصغير الحجم قليلاً */
             height: 80px;
             border: 3px solid transparent;
             border-top-color: #0055d4;
@@ -79,7 +63,31 @@
             100% { transform: rotate(360deg); }
         }
 
-        #welcome-msg-1 { display: block; }
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.1); }
+            100% { opacity: 0; transform: scale(1); display: none; }
+        }
+
+        /* تصغير حجم رسائل الترحيب وضبطها في المنتصف */
+        .welcome-msg-container {
+            max-width: 400px;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .welcome-msg {
+            font-size: 1.4rem; /* تصغير حجم الخط */
+            text-shadow: 0 0 10px #0055d4;
+            margin: 10px 0;
+            display: none; 
+            color: #ffffff !important;
+            line-height: 1.5;
+        }
+
+        #welcome-msg-1 { animation: pulse 2s infinite; }
 
         .success-company-img {
             width: 70%;
@@ -92,6 +100,16 @@
             animation: fadeIn 1s forwards;
         }
 
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.05); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         /* --- التنسيقات الأساسية --- */
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -102,16 +120,8 @@
             background-color: #f0f2f5;
         }
 
-        #main-content p, #main-content h2, #main-content label, #main-content div, #main-content span {
+        #main-content p, #main-content h2, #main-content h6, #main-content label, #main-content div, #main-content span {
             color: #000000 !important;
-        }
-
-        /* تكبير نص المبرمج */
-        .programmer-text {
-            font-size: 1.4rem !important;
-            font-weight: bold !important;
-            color: #0055d4 !important;
-            margin: 15px 0;
         }
 
         .contact-container {
@@ -123,6 +133,21 @@
             max-width: 550px;
             text-align: center;
             margin: 20px auto 40px auto;
+        }
+
+        @media (max-width: 600px) {
+            .contact-container { padding: 20px; width: 95%; }
+        }
+
+        .tech-main-image {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         #clock-container {
@@ -175,13 +200,10 @@
 
         #main-content { display: none; width: 100%; }
 
-        /* تنسيق صفحة النجاح لتظهر في بداية الصفحة */
         #success-page {
             display: none;
-            width: 100%;
-            position: absolute;
-            top: 0;
-            z-index: 10000;
+            text-align: center;
+            padding: 50px 20px;
         }
     </style>
 </head>
@@ -189,14 +211,16 @@
 <body>
 
     <div id="success-page">
-        <div class="contact-container" style="border: 3px solid #28a745;">
+        <div class="contact-container">
             <h2 style="color: #28a745 !important;">✅ تم إرسال الرسالة بنجاح</h2>
-            <p style="font-weight: bold;">شكراً لتواصلك معنا، سنرد عليك قريباً جداً.</p>
-            <p>يتم الآن إعادتك لصفحة الموقع الأساسية...</p>
+            <p>شكراً لتواصلك معنا، سنرد عليك قريباً جداً.</p>
+            <p>يتم الآن إعادتك لصفحة الموقع...</p>
         </div>
     </div>
 
     <div id="splash-screen">
+        <img id="sudan-flag" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Flag_of_Sudan.svg/800px-Flag_of_Sudan.svg.png" alt="Sudan Flag">
+        
         <div class="ai-loader"></div>
         <div class="welcome-msg-container">
             <div id="welcome-msg-1" class="welcome-msg">مرحباً بكم في موقع البحير نت <br> عالم التكنولوجيا والذكاء الاصطناعي</div>
@@ -217,7 +241,7 @@
 
             <hr>
             <p>يوفر موقع البحير نت حلول تقنية كاملة في مجال التكنولوجيا ومواقع التواصل الاجتماعية...</p>
-            <h6 class="programmer-text">تم بناء وتصميم الموقع بواسطة المبرمج محمود عصام...</h6>
+            <h6 style="font-weight: bold;">تم بناء وتصميم الموقع بواسطة المبرمج محمود عصام...</h6>
             <hr>
 
             <br>
@@ -290,28 +314,14 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // وظيفة التحدث بصوت فتاة
-        function speakSuccess() {
-            const msg = new SpeechSynthesisUtterance();
-            msg.text = "تم إرسال الرسالة بنجاح، سنرد عليك قريباً جداً شكراً لك";
-            msg.lang = 'ar-SA';
-            msg.rate = 0.9; 
-            window.speechSynthesis.speak(msg);
-        }
-
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('status') === 'success') {
                 document.getElementById('success-page').style.display = 'block';
                 document.getElementById('splash-screen').style.display = 'none';
-                document.getElementById('main-content').style.display = 'block';
-                
-                // تشغيل الصوت
-                speakSuccess();
-
                 setTimeout(() => {
                     window.location.href = window.location.pathname;
-                }, 5000);
+                }, 4000);
                 return;
             }
 
@@ -319,15 +329,34 @@
             const m2 = document.getElementById('welcome-msg-2');
             const m3 = document.getElementById('thanks-msg');
             const img = document.getElementById('success-img');
+            const flag = document.getElementById('sudan-flag');
             const splash = document.getElementById('splash-screen');
             const main = document.getElementById('main-content');
 
-            setTimeout(() => { m1.style.display = 'none'; m2.style.display = 'block'; }, 5000);
-            setTimeout(() => { m2.style.display = 'none'; m3.style.display = 'block'; img.style.display = 'block'; }, 7500);
+            // إخفاء العلم وبدء الرسائل بعد 3 ثواني
+            setTimeout(() => {
+                if(flag) flag.style.display = 'none';
+                m1.style.display = 'block';
+            }, 3000);
+
+            setTimeout(() => { 
+                m1.style.display = 'none'; 
+                m2.style.display = 'block'; 
+            }, 6000);
+
+            setTimeout(() => { 
+                m2.style.display = 'none'; 
+                m3.style.display = 'block'; 
+                img.style.display = 'block'; 
+            }, 9000);
+
             setTimeout(() => {
                 splash.style.opacity = '0';
-                setTimeout(() => { splash.style.display = 'none'; main.style.display = 'block'; }, 1000);
-            }, 10000);
+                setTimeout(() => { 
+                    splash.style.display = 'none'; 
+                    main.style.display = 'block'; 
+                }, 1000);
+            }, 12000);
         };
     </script>
 </body>
