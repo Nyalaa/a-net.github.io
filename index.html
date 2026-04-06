@@ -28,17 +28,8 @@
             padding: 20px;
         }
 
-        /* تنسيق العلم السوداني */
-        #sudan-flag {
-            width: 120px;
-            height: 80px;
-            margin-bottom: 20px;
-            display: block;
-            animation: fadeInOut 3s forwards;
-        }
-
         .ai-loader {
-            width: 80px; /* تم تصغير الحجم قليلاً */
+            width: 80px; /* تصغير حجم اللودر قليلاً */
             height: 80px;
             border: 3px solid transparent;
             border-top-color: #0055d4;
@@ -63,31 +54,16 @@
             100% { transform: rotate(360deg); }
         }
 
-        @keyframes fadeInOut {
-            0% { opacity: 0; transform: scale(0.5); }
-            50% { opacity: 1; transform: scale(1.1); }
-            100% { opacity: 0; transform: scale(1); display: none; }
-        }
-
-        /* تصغير حجم رسائل الترحيب وضبطها في المنتصف */
-        .welcome-msg-container {
-            max-width: 400px;
-            min-height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
         .welcome-msg {
-            font-size: 1.4rem; /* تصغير حجم الخط */
-            text-shadow: 0 0 10px #0055d4;
+            font-size: 1.2rem; /* تصغير النص كما طلبت */
+            text-shadow: 0 0 15px #0055d4;
             margin: 10px 0;
             display: none; 
             color: #ffffff !important;
-            line-height: 1.5;
+            max-width: 300px; /* لضمان التوسط في المنتصف */
         }
 
-        #welcome-msg-1 { animation: pulse 2s infinite; }
+        #welcome-msg-1 { display: block; animation: pulse 2s infinite; }
 
         .success-company-img {
             width: 70%;
@@ -135,8 +111,27 @@
             margin: 20px auto 40px auto;
         }
 
+        .back-link-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #0055d4, #00a2ff);
+            color: white !important;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 85, 212, 0.3);
+            transition: 0.3s;
+        }
+
+        .back-link-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 85, 212, 0.4);
+        }
+
         @media (max-width: 600px) {
             .contact-container { padding: 20px; width: 95%; }
+            .welcome-msg { font-size: 1rem; }
         }
 
         .tech-main-image {
@@ -214,13 +209,12 @@
         <div class="contact-container">
             <h2 style="color: #28a745 !important;">✅ تم إرسال الرسالة بنجاح</h2>
             <p>شكراً لتواصلك معنا، سنرد عليك قريباً جداً.</p>
-            <p>يتم الآن إعادتك لصفحة الموقع...</p>
+            <br>
+            <a href="javascript:void(0)" onclick="goToHome()" class="back-link-btn">هل تريد الرجوع لموقع البحير نت؟ 🌐</a>
         </div>
     </div>
 
     <div id="splash-screen">
-        <img id="sudan-flag" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Flag_of_Sudan.svg/800px-Flag_of_Sudan.svg.png" alt="Sudan Flag">
-        
         <div class="ai-loader"></div>
         <div class="welcome-msg-container">
             <div id="welcome-msg-1" class="welcome-msg">مرحباً بكم في موقع البحير نت <br> عالم التكنولوجيا والذكاء الاصطناعي</div>
@@ -264,7 +258,7 @@
                 <div class="form-group">
                     <select name="المشكلة" required>
                         <option value="" disabled selected>اختار نوع تواصلك</option>
-                        <option value="امرا اخر"> امرا اخر</option>
+                        <option value="فتح حساب او كاش">فتح حساب او كاش</option> <option value="امرا اخر"> امرا اخر</option>
                         <option value="برمجة شبكات الواي فاي"> برمجة شبكات الواي فاي</option>
                         <option value="ربط أنتينا"> ربط أنتينا</option>
                         <option value="استضافة لموقع إنتيرنيتي">استضافة لموقع إلكتروني</option>
@@ -303,6 +297,7 @@
     </div>
 
     <script>
+        // إعداد رابط العودة
         document.getElementById('next-url').value = window.location.href + "?status=success";
 
         function updateClock() {
@@ -314,14 +309,19 @@
         setInterval(updateClock, 1000);
         updateClock();
 
+        // وظيفة العودة اليدوية
+        function goToHome() {
+            window.location.href = window.location.pathname;
+        }
+
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
+            
+            // التحقق من حالة الإرسال أولاً لإظهار رسالة النجاح
             if (urlParams.get('status') === 'success') {
                 document.getElementById('success-page').style.display = 'block';
                 document.getElementById('splash-screen').style.display = 'none';
-                setTimeout(() => {
-                    window.location.href = window.location.pathname;
-                }, 4000);
+                document.getElementById('main-content').style.display = 'none';
                 return;
             }
 
@@ -329,26 +329,19 @@
             const m2 = document.getElementById('welcome-msg-2');
             const m3 = document.getElementById('thanks-msg');
             const img = document.getElementById('success-img');
-            const flag = document.getElementById('sudan-flag');
             const splash = document.getElementById('splash-screen');
             const main = document.getElementById('main-content');
-
-            // إخفاء العلم وبدء الرسائل بعد 3 ثواني
-            setTimeout(() => {
-                if(flag) flag.style.display = 'none';
-                m1.style.display = 'block';
-            }, 3000);
 
             setTimeout(() => { 
                 m1.style.display = 'none'; 
                 m2.style.display = 'block'; 
-            }, 6000);
+            }, 5000);
 
             setTimeout(() => { 
                 m2.style.display = 'none'; 
                 m3.style.display = 'block'; 
                 img.style.display = 'block'; 
-            }, 9000);
+            }, 7500);
 
             setTimeout(() => {
                 splash.style.opacity = '0';
@@ -356,7 +349,7 @@
                     splash.style.display = 'none'; 
                     main.style.display = 'block'; 
                 }, 1000);
-            }, 12000);
+            }, 10000);
         };
     </script>
 </body>
