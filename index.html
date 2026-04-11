@@ -10,35 +10,32 @@
 
         /* شاشة الدخول والتسجيل */
         #auth-screen { position: fixed; inset: 0; background: linear-gradient(135deg, var(--main), var(--dark)); display: flex; justify-content: center; align-items: center; z-index: 10000; }
-        .auth-box { background: white; padding: 20px; border-radius: 20px; width: 340px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3); max-height: 95vh; overflow-y: auto; }
-        #preview-img { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid var(--main); margin-bottom: 10px; cursor: pointer; }
+        .auth-box { background: white; padding: 20px; border-radius: 20px; width: 340px; text-align: center; max-height: 90vh; overflow-y: auto; }
+        #preview-img { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid var(--main); margin-bottom: 10px; }
         input, select { width: 100%; padding: 10px; margin: 5px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
         .btn-reg { background: var(--main); color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; }
         .btn-login-toggle { background: var(--dark); color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 10px; }
 
-        /* هيكل التطبيق الرئيسي */
+        /* التطبيق الرئيسي */
         #main-app { display: none; }
         .header { background: var(--main); color: white; padding: 15px; text-align: center; position: fixed; top: 0; width: 100%; z-index: 1000; font-weight: bold; }
         .content { padding: 60px 10px 80px 10px; max-width: 600px; margin: 0 auto; }
         .page { display: none; }
         .active-page { display: block; }
 
-        /* كرت المستخدم في صفحة استكشف */
-        .user-card { background: white; border-radius: 15px; overflow: hidden; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); position: relative; }
-        .user-card img { width: 100%; height: 250px; object-fit: cover; cursor: pointer; }
+        /* كرت المستخدم */
+        .user-card { background: white; border-radius: 15px; overflow: hidden; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .user-card img { width: 100%; height: 280px; object-fit: cover; cursor: pointer; }
         .user-info { padding: 15px; }
-        .status-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-left: 5px; }
-        .online { background: #4caf50; } .offline { background: #9e9e9e; }
-        .actions { display: flex; justify-content: space-between; padding: 10px; border-top: 1px solid #eee; background: #fafafa; }
-        .btn-action { flex: 1; border: none; background: none; cursor: pointer; font-size: 0.85rem; color: #555; display: flex; flex-direction: column; align-items: center; }
-        .btn-action i { font-size: 1.2rem; margin-bottom: 3px; }
+        .status-badge { font-size: 0.75rem; padding: 3px 8px; border-radius: 10px; background: #eee; }
+        .actions { display: flex; justify-content: space-around; padding: 10px; border-top: 1px solid #eee; }
+        .btn-action { border: none; background: none; cursor: pointer; color: #555; font-size: 0.85rem; }
 
-        /* صفحة الإشعارات */
-        .notif-card { background: white; padding: 15px; border-radius: 12px; margin-bottom: 10px; border-right: 5px solid var(--main); display: flex; justify-content: space-between; align-items: center; }
+        /* الإشعارات */
+        .notif-item { background: white; padding: 15px; border-radius: 12px; margin-bottom: 10px; border-right: 5px solid var(--main); display: flex; justify-content: space-between; align-items: center; }
 
-        /* التنقل السفلي */
-        .navbar { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #ddd; z-index: 1000; }
-        .nav-item { cursor: pointer; color: #888; text-align: center; font-size: 0.8rem; }
+        .navbar { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #ddd; z-index: 1000; }
+        .nav-item { cursor: pointer; color: #888; font-size: 0.85rem; }
         .nav-item.active { color: var(--main); font-weight: bold; }
     </style>
 </head>
@@ -46,206 +43,191 @@
 
     <div id="auth-screen">
         <div class="auth-box" id="reg-box">
-            <h2 style="color:var(--main); margin:0;">تسجيل جديد</h2>
-            <img id="preview-img" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" onclick="document.getElementById('file-in').click()">
-            <input type="file" id="file-in" accept="image/*" style="display:none" onchange="previewFile(this)">
+            <h2 style="color:var(--main);">تسجيل جديد</h2>
+            <img id="preview-img" src="https://cdn-icons-png.flaticon.com/512/149/149071.png">
+            <input type="file" id="f-in" accept="image/*" style="display:none" onchange="loadFile(this)">
+            <button onclick="document.getElementById('f-in').click()" style="margin-bottom:10px; cursor:pointer;">اختيار صورة</button>
             
             <input type="text" id="r-name" placeholder="اسم المستخدم">
             <input type="password" id="r-pass" placeholder="كلمة السر">
             
             <div style="display:flex; gap:5px;">
                 <input type="number" id="r-age" placeholder="العمر">
-                <select id="r-gender">
-                    <option value="ذكر">ذكر</option>
-                    <option value="أنثى">أنثى</option>
-                </select>
+                <select id="r-gen"><option>ذكر</option><option>أنثى</option></select>
             </div>
 
-            <select id="r-state">
-                <option value="">اختر الولاية (السودان)</option>
-                <option>الخرطوم</option><option>الجزيرة</option><option>البحر الأحمر</option><option>كسلا</option>
-                <option>القضارف</option><option>سنار</option><option>النيل الأبيض</option><option>النيل الأزرق</option>
-                <option>الشمالية</option><option>نهر النيل</option><option>شمال كردفان</option><option>جنوب كردفان</option>
-                <option>غرب كردفان</option><option>شمال دارفور</option><option>جنوب دارفور</option><option>غرب دارفور</option>
-                <option>وسط دارفور</option><option>شرق دارفور</option>
+            <select id="r-st">
+                <option value="">اختر الولاية / المدينة</option>
+                <option>الخرطوم</option>
+                <option>امدرمان</option>
+                <option>كسلا</option>
+                <option>القضارف</option>
+                <option>سنار</option>
+                <option>النيل الأبيض</option>
+                <option>النيل الأزرق</option>
+                <option>الشمالية</option>
+                <option>نهر النيل</option>
+                <option>شمال كردفان</option>
+                <option>جنوب كردفان</option>
+                <option>غرب كردفان</option>
+                <option>شمال دارفور</option>
+                <option>جنوب دارفور</option>
+                <option>غرب دارفور</option>
+                <option>وسط دارفور</option>
+                <option>شرق دارفور</option>
             </select>
 
-            <select id="r-status">
-                <option value="أعزب">أعزب</option>
-                <option value="مطلق">مطلق</option>
-                <option value="أرمل">أرمل</option>
+            <select id="r-soc">
+                <option>أعزب</option>
+                <option>مطلق</option>
+                <option>أرمل</option>
             </select>
 
-            <button class="btn-reg" onclick="register()">إنشاء حساب ودخول</button>
-            <button class="btn-login-toggle" onclick="toggleAuth(true)">لدي حساب بالفعل</button>
+            <button class="btn-reg" onclick="doRegister()">إنشاء حساب ودخول</button>
+            <button class="btn-login-toggle" onclick="toggleView(true)">لدي حساب بالفعل</button>
         </div>
 
         <div class="auth-box" id="log-box" style="display:none;">
             <h2 style="color:var(--dark);">دخول</h2>
             <input type="text" id="l-name" placeholder="اسم المستخدم">
             <input type="password" id="l-pass" placeholder="كلمة السر">
-            <button class="btn-reg" style="background:var(--dark)" onclick="login()">دخول للموقع</button>
-            <button onclick="toggleAuth(false)" style="background:none; border:none; color:var(--main); margin-top:10px; cursor:pointer;">تسجيل حساب جديد</button>
+            <button class="btn-reg" style="background:var(--dark)" onclick="doLogin()">دخول للموقع</button>
+            <button onclick="toggleView(false)" style="background:none; border:none; color:var(--main); margin-top:10px; cursor:pointer;">إنشاء حساب جديد</button>
         </div>
     </div>
 
     <div id="main-app">
-        <div class="header" id="header-title">استكشف أصدقاء للتعارف</div>
-        
+        <div class="header" id="h-title">استكشف أصدقاء للتعارف</div>
         <div class="content">
-            <div id="page-explore" class="page active-page"></div>
-
-            <div id="page-notifs" class="page">
-                <div id="notifs-list"></div>
-            </div>
+            <div id="p-explore" class="page active-page"></div>
+            <div id="p-notifs" class="page"><div id="n-list"></div></div>
         </div>
-
         <div class="navbar">
-            <div class="nav-item active" onclick="nav('explore', 'استكشف أصدقاء', this)">🔍 استكشف</div>
-            <div class="nav-item" onclick="nav('notifs', 'الإشعارات', this)">🔔 الإشعارات</div>
-            <div class="nav-item" onclick="location.reload()" style="color:red">🚪 خروج</div>
+            <div class="nav-item active" onclick="nav('explore','استكشف أصدقاء',this)">🔍 استكشف</div>
+            <div class="nav-item" onclick="nav('notifs','الإشعارات',this)">🔔 الإشعارات</div>
+            <div class="nav-item" onclick="logOut()" style="color:red">🚪 خروج</div>
         </div>
     </div>
 
     <script>
-        let currentUser = null;
-        let users = JSON.parse(localStorage.getItem('albeher_users') || '[]');
-        let profileImg = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+        let users = JSON.parse(localStorage.getItem('app_users') || '[]');
+        let current = JSON.parse(sessionStorage.getItem('active_user'));
+        let tempImg = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
 
-        // التحقق من الجلسة عند فتح الصفحة (منع التحويل الالي للتسجيل)
-        window.onload = function() {
-            const saved = sessionStorage.getItem('activeUser');
-            if(saved) {
-                currentUser = JSON.parse(saved);
-                enterApp();
-            }
-        };
+        if(current) enter();
 
-        function previewFile(input) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    profileImg = e.target.result;
-                    document.getElementById('preview-img').src = profileImg;
+        function loadFile(i) {
+            if (i.files && i.files[0]) {
+                const r = new FileReader();
+                r.onload = (e) => { 
+                    tempImg = e.target.result; 
+                    document.getElementById('preview-img').src = tempImg; 
                 };
-                reader.readAsDataURL(input.files[0]);
+                r.readAsDataURL(i.files[0]);
             }
         }
 
-        function toggleAuth(isLogin) {
-            document.getElementById('reg-box').style.display = isLogin ? 'none' : 'block';
-            document.getElementById('log-box').style.display = isLogin ? 'block' : 'none';
+        function toggleView(v) {
+            document.getElementById('reg-box').style.display = v ? 'none' : 'block';
+            document.getElementById('log-box').style.display = v ? 'block' : 'none';
         }
 
-        function register() {
-            const name = document.getElementById('r-name').value.trim();
-            const pass = document.getElementById('r-pass').value;
-            if(!name || !pass) return alert("اكمل البيانات");
-
-            const newUser = {
-                id: Date.now(),
-                name, pass,
+        function doRegister() {
+            const n = document.getElementById('r-name').value.trim();
+            const p = document.getElementById('r-pass').value;
+            if(!n || !p) return alert("الرجاء إكمال البيانات");
+            
+            const u = {
+                id: Date.now(), name: n, pass: p,
                 age: document.getElementById('r-age').value,
-                gender: document.getElementById('r-gender').value,
-                state: document.getElementById('r-state').value,
-                status: document.getElementById('r-status').value,
-                photo: profileImg,
-                joined: new Date().toLocaleDateString('ar-EG'),
-                likes: 0,
-                isOnline: true,
-                lastSeen: "الآن"
+                gen: document.getElementById('r-gen').value,
+                st: document.getElementById('r-st').value,
+                soc: document.getElementById('r-soc').value,
+                img: tempImg, likes: 0, date: new Date().toLocaleDateString('ar-EG')
             };
-
-            users.push(newUser);
-            localStorage.setItem('albeher_users', JSON.stringify(users));
-            currentUser = newUser;
-            sessionStorage.setItem('activeUser', JSON.stringify(newUser));
-            enterApp();
+            
+            users.push(u);
+            localStorage.setItem('app_users', JSON.stringify(users));
+            current = u;
+            sessionStorage.setItem('active_user', JSON.stringify(u));
+            enter();
         }
 
-        function login() {
-            const name = document.getElementById('l-name').value.trim();
-            const pass = document.getElementById('l-pass').value;
-            const user = users.find(u => u.name === name && u.pass === pass);
-
-            if(user) {
-                user.isOnline = true;
-                user.lastSeen = "الآن";
-                currentUser = user;
-                sessionStorage.setItem('activeUser', JSON.stringify(user));
-                enterApp();
-            } else { alert("خطأ في البيانات"); }
+        function doLogin() {
+            const n = document.getElementById('l-name').value.trim();
+            const p = document.getElementById('l-pass').value;
+            const u = users.find(x => x.name === n && x.pass === p);
+            if(u) {
+                current = u;
+                sessionStorage.setItem('active_user', JSON.stringify(u));
+                enter();
+            } else { alert("بيانات الدخول غير صحيحة"); }
         }
 
-        function enterApp() {
+        function enter() {
             document.getElementById('auth-screen').style.display = 'none';
             document.getElementById('main-app').style.display = 'block';
-            renderExplore();
-            addOnlineNotification();
+            draw();
+            makeNotif();
         }
 
-        function renderExplore() {
-            const container = document.getElementById('page-explore');
-            container.innerHTML = "";
+        function draw() {
+            const box = document.getElementById('p-explore');
+            box.innerHTML = "";
             users.forEach(u => {
-                // عرض المستخدمين الآخرين فقط
-                if(u.name !== currentUser.name) {
-                    container.innerHTML += `
+                if(u.name !== current.name) {
+                    box.innerHTML += `
                         <div class="user-card">
-                            <img src="${u.photo}" onclick="viewFullPhoto('${u.photo}')">
+                            <img src="${u.img}" onclick="viewImg('${u.img}')">
                             <div class="user-info">
-                                <b>${u.name}</b> <span class="status-dot ${u.isOnline?'online':'offline'}"></span>
-                                <div style="font-size:0.8rem; color:#666;">
-                                    ${u.gender} | ${u.status} | ${u.state}<br>
-                                    نشاط: ${u.lastSeen} | انضم: ${u.joined}
-                                </div>
+                                <b>${u.name}</b> <span class="status-badge">متصل الآن</span><br>
+                                <small>${u.gen} | ${u.soc} | ${u.st} | انضم: ${u.date}</small>
                             </div>
                             <div class="actions">
-                                <button class="btn-action" onclick="addLike(${u.id})">❤️ <span id="like-${u.id}">${u.likes}</span> احببته</button>
-                                <button class="btn-action" onclick="alert('ملف ${u.name}')">👤 عرض الملف</button>
-                                <button class="btn-action" onclick="alert('فتح محادثة مع ${u.name}')">💬 رسالة</button>
+                                <button class="btn-action" onclick="hitLike(${u.id})">❤️ <span id="l-${u.id}">${u.likes}</span> أحببته</button>
+                                <button class="btn-action" onclick="alert('ملف ${u.name}')">👤 ملف</button>
+                                <button class="btn-action" onclick="alert('فتح الدردشة مع ${u.name}')">💬 رسالة</button>
                             </div>
-                        </div>
-                    `;
+                        </div>`;
                 }
             });
         }
 
-        function addLike(id) {
-            const user = users.find(u => u.id === id);
-            user.likes++;
-            localStorage.setItem('albeher_users', JSON.stringify(users));
-            document.getElementById('like-'+id).innerText = user.likes;
+        function hitLike(id) {
+            const u = users.find(x => x.id === id);
+            u.likes++;
+            localStorage.setItem('app_users', JSON.stringify(users));
+            document.getElementById('l-'+id).innerText = u.likes;
         }
 
-        function viewFullPhoto(src) {
-            const win = window.open("");
-            win.document.write(`<img src="${src}" style="width:100%"><br><a href="${src}" download="profile.jpg">تنزيل الصورة</a>`);
+        function viewImg(s) {
+            const w = window.open("");
+            w.document.write(`<title>عرض الصورة</title><img src="${s}" style="max-width:100%"><br><a href="${s}" download="profile_image.jpg" style="font-family:sans-serif; display:inline-block; margin-top:10px; padding:10px; background:#ff2d55; color:white; text-decoration:none; border-radius:5px;">تحميل الصورة الشخصية</a>`);
         }
 
-        function addOnlineNotification() {
-            const list = document.getElementById('notifs-list');
-            // محاكاة إشعار عند دخول المستخدم
-            const randomUser = users.find(u => u.name !== currentUser.name);
-            if(randomUser) {
+        function makeNotif() {
+            const list = document.getElementById('n-list');
+            const other = users.find(x => x.name !== current.name);
+            if(other) {
                 list.innerHTML = `
-                    <div class="notif-card">
-                        <div>
-                            <b>${randomUser.name}</b> متصل الآن.. اتريد مراسلته؟
-                        </div>
-                        <button onclick="nav('explore','استكشف',this)" style="background:var(--main); color:white; border:none; padding:5px 10px; border-radius:5px;">مراسلة الآن</button>
-                    </div>
-                ` + list.innerHTML;
+                <div class="notif-item">
+                    <span><b>${other.name}</b> متصل الآن.. مراسلة؟</span>
+                    <button onclick="nav('explore','استكشف أصدقاء',this)" style="background:var(--main); color:white; border:none; padding:8px 12px; border-radius:5px; cursor:pointer;">مراسلة الآن</button>
+                </div>`;
+            } else {
+                list.innerHTML = "<p style='text-align:center; color:#999;'>لا توجد إشعارات جديدة</p>";
             }
         }
 
-        function nav(page, title, el) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
-            document.getElementById('page-' + page).classList.add('active-page');
-            document.getElementById('header-title').innerText = title;
-            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-            el.classList.add('active');
+        function nav(p, t, el) {
+            document.querySelectorAll('.page').forEach(x => x.classList.remove('active-page'));
+            document.getElementById('p-' + p).classList.add('active-page');
+            document.getElementById('h-title').innerText = t;
+            document.querySelectorAll('.nav-item').forEach(x => x.classList.remove('active'));
+            if(el) el.classList.add('active');
         }
+
+        function logOut() { sessionStorage.clear(); location.reload(); }
     </script>
 </body>
 </html>
