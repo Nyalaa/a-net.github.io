@@ -206,6 +206,72 @@
             background: #e6f0ff;
             z-index: 10000;
         }
+        /* تصميم زر وشباك المحادثة الذكي */
+#ai-chat-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#ai-chat-button {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, #0055d4, #00a2ff);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: 0.3s;
+}
+
+#ai-chat-window {
+    width: 300px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    display: none; /* مخفي افتراضياً */
+    flex-direction: column;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.chat-header {
+    background: #0055d4;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+#chat-body {
+    height: 250px;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ai-msg {
+    background: #f0f2f5;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    align-self: flex-start;
+}
+
+.user-msg {
+    background: #0055d4;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    align-self: flex-end;
+    }
     </style>
 </head>
 
