@@ -19,7 +19,7 @@
             background-color: #e6f0ff;
         }
 
-        /* --- تصميم صفحة النجاح بخلفية متحركة --- */
+        /* --- تصميم صفحة النجاح بخلفية متحركة احترافية --- */
         #success-page {
             position: fixed;
             top: 0;
@@ -31,7 +31,6 @@
             justify-content: center;
             align-items: center;
             z-index: 10000;
-            /* خلفية متحركة احترافية */
             background: linear-gradient(-45deg, #001a33, #0055d4, #00a2ff, #001a33);
             background-size: 400% 400%;
             animation: gradientBG 10s ease infinite;
@@ -59,11 +58,10 @@
         @keyframes bounceIn {
             0% { transform: scale(0.3); opacity: 0; }
             50% { transform: scale(1.05); }
-            70% { transform: scale(0.9); }
             100% { transform: scale(1); opacity: 1; }
         }
 
-        /* --- شاشة الترحيب --- */
+        /* --- استرجاع شاشة الترحيب الأصلية بكامل تفاصيلها --- */
         #splash-screen {
             position: fixed;
             top: 0;
@@ -77,7 +75,10 @@
             align-items: center;
             z-index: 9999;
             transition: opacity 1s ease-out, visibility 1s;
-            color: #ffffff;
+            color: #ffffff !important;
+            text-align: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
         }
 
         .ai-loader {
@@ -87,6 +88,7 @@
             border-top-color: #0055d4;
             border-radius: 50%;
             animation: spin 1.5s linear infinite;
+            position: relative;
             margin-bottom: 20px;
         }
 
@@ -95,7 +97,38 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* --- واجهة الموقع --- */
+        .welcome-msg {
+            font-size: 1.2rem;
+            text-shadow: 0 0 15px #0055d4;
+            margin: 10px 0;
+            display: none; 
+            color: #ffffff !important;
+            max-width: 300px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.05); }
+        }
+
+        .success-company-img {
+            width: 70%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 15px;
+            margin-top: 20px;
+            box-shadow: 0 0 20px rgba(0, 85, 212, 0.5);
+            display: none;
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* --- واجهة الموقع الرئيسية --- */
         .contact-container {
             background: #ffffff;
             padding: 20px;
@@ -104,7 +137,7 @@
             width: 95%;
             max-width: 550px;
             text-align: center;
-            margin: 20px auto 40px auto;
+            margin: 15px auto 40px auto;
             box-sizing: border-box;
         }
 
@@ -113,47 +146,29 @@
             background: #f8fbff;
             border: 2px solid #0055d4;
             border-radius: 15px;
-            margin: 25px 0;
+            margin: 20px 0;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             text-align: right;
         }
 
-        .chat-header {
-            background: #0055d4;
-            color: white;
-            padding: 10px;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        #chat-body {
-            height: 180px;
-            padding: 15px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            background: #ffffff;
-        }
-
+        .chat-header { background: #0055d4; color: white; padding: 10px; font-weight: bold; text-align: center; }
+        #chat-body { height: 180px; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: #ffffff; }
         .ai-msg { background: #eef4ff; padding: 8px 12px; border-radius: 10px; font-size: 0.9rem; align-self: flex-start; border-right: 4px solid #0055d4; max-width: 85%; }
         .user-msg { background: #0055d4; color: white; padding: 8px 12px; border-radius: 10px; font-size: 0.9rem; align-self: flex-end; max-width: 85%; }
+        #ai-input { width: 100%; padding: 12px; border: none; border-top: 1px solid #cce0ff; outline: none; box-sizing: border-box; }
 
-        #ai-input { width: 100%; padding: 12px; border: none; border-top: 1px solid #cce0ff; outline: none; }
-
-        .tech-main-image { width: 100%; max-width: 500px; border-radius: 15px; margin-bottom: 20px; }
-
-        #clock-container { background-color: #f0f7ff; padding: 15px; border-radius: 10px; margin: 15px auto; border: 1px solid #cce0ff; }
+        .tech-main-image { width: 100%; max-width: 500px; border-radius: 15px; margin-bottom: 15px; }
+        #clock-container { background-color: #f0f7ff; padding: 15px; border-radius: 10px; margin-bottom: 15px; border: 1px solid #cce0ff; }
         #time { color: #0055d4; font-size: 1.8rem; font-weight: bold; }
 
-        .form-group { margin-bottom: 20px; text-align: right; }
+        .form-group { margin-bottom: 15px; text-align: right; }
         textarea, input, select { width: 100%; padding: 12px; border: 2px solid #a3c2f0; border-radius: 10px; box-sizing: border-box; }
-        button { background-color: #0055d4; color: white; padding: 15px 30px; border-radius: 10px; border: none; font-weight: bold; cursor: pointer; width: 100%; }
+        button { background-color: #0055d4; color: white; padding: 15px; border-radius: 10px; border: none; font-weight: bold; cursor: pointer; width: 100%; }
 
         .fb-link { display: block; padding: 12px; background-color: #f0f7ff; color: #0055d4; text-decoration: none; border-radius: 10px; border: 1px solid #0055d4; margin-bottom: 10px; font-weight: bold; }
-        .home-btn { background: white; color: #0055d4; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 20px; }
+        .home-btn { background: white; color: #0055d4; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 15px; }
     </style>
 </head>
 
@@ -170,23 +185,24 @@
 
     <div id="splash-screen">
         <div class="ai-loader"></div>
-        <div id="welcome-msg-1" style="display:block;">مرحباً بكم في موقع البحير نت</div>
-        <div id="welcome-msg-2" style="display:none;">عالم التكنولوجيا والذكاء الاصطناعي</div>
+        <div class="welcome-msg-container">
+            <div id="welcome-msg-1" class="welcome-msg" style="display: block;">مرحباً بكم في موقع البحير نت <br> عالم التكنولوجيا والذكاء الاصطناعي</div>
+            <div id="welcome-msg-2" class="welcome-msg">نسعى دائماً لتقديم الأفضل لكم في عالم البرمجة</div>
+            <div id="thanks-msg" class="welcome-msg">شكرآ لصبرك ايها الزائر</div>
+            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80" class="success-company-img" id="success-img">
+        </div>
     </div>
 
     <div id="main-content" style="display:none;">
         <div class="contact-container">
             <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80" class="tech-main-image">
-
             <div id="clock-container">
                 <div id="date">جاري التحميل...</div>
                 <div id="time">00:00:00</div>
             </div>
-
             <hr>
-            <p>يوفر موقع البحير نت حلول تقنية كاملة في مجال التكنولوجيا ومواقع التواصل الاجتماعية...</p>
+            <p style="font-size: 0.9rem;">يوفر موقع البحير نت حلول تقنية كاملة في مجال التكنولوجيا ومواقع التواصل الاجتماعية...</p>
             <hr>
-
             <a href="https://www.facebook.com/profile.php?id=100077831043049" target="_blank" class="fb-link">لمتابعة مبرمج الموقع على فيسبوك 🌐</a>
             <a href="https://www.facebook.com/profile.php?id=61573366409779" target="_blank" class="fb-link">صفحتنا الرسمية علي فيسبوك 🌐</a>
 
@@ -201,21 +217,29 @@
             <form action="https://formsubmit.co/fastfyks@gmail.com" method="post">
                 <input type="hidden" name="_next" id="next-url" value="">
                 <input type="hidden" name="_captcha" value="false">
+                <div class="form-group"><input type="text" name="الاسم" placeholder="الاسم الكامل" required></div>
                 <div class="form-group">
-                    <input type="text" name="Name" placeholder="الاسم الكامل" required>
-                </div>
-                <div class="form-group">
-                    <select name="Service" required>
+                    <select name="الخدمة" required>
                         <option value="" disabled selected>اختار نوع تواصلك</option>
+                        <option value="فتح حساب او كاش">فتح حساب او كاش</option> 
+                        <option value="امرا اخر"> امرا اخر</option>
+                        <option value="برمجة شبكات الواي فاي"> برمجة شبكات الواي فاي</option>
+                        <option value="ربط أنتينا"> ربط أنتينا</option>
+                        <option value="استضافة لموقع إنتيرنيتي">استضافة لموقع إلكتروني</option>
+                        <option value="تم قفل حسابي علي فيسبوك">تم قفل حسابي علي فيسبوك</option>
+                        <option value="تأمين حساب فايسبوك">تأمين حساب فيسبوك</option>
+                        <option value="شراكة تقنية"> انا تقني تكنولوجيا المعلومات واريد شراكة معك</option>
+                        <option value="تأكيد هوية"> تأكيد حساب فيسبوك بالبطاقة القومية</option>
+                        <option value="فتح حسابات تواصل">فتح حساب (واتساب/تويتر/انستغرام)</option>
                         <option value="بنكك">فتح حساب بنكك</option>
-                        <option value="فيسبوك">تأمين حساب فيسبوك</option>
-                        <option value="واي فاي">برمجة شبكات واي فاي</option>
-                        <option value="أخرى">أمر آخر</option>
+                        <option value="فوري">فتح حساب فوري</option>
+                        <option value="المشرق">فتح حساب بنك المشرق</option>
+                        <option value="الاسلامي">فتح حساب البنك الاسلامي السوداني</option>
+                        <option value="النيل">فتح حساب بنك النيل</option>
+                        <option value="محفظة">فتح محفظة الكترونية</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <textarea name="Message" rows="4" placeholder="اكتب رسالتك..." required></textarea>
-                </div>
+                <div class="form-group"><textarea name="الرسالة" rows="4" placeholder="اكتب رسالتك..." required></textarea></div>
                 <button type="submit">إرسال البيانات</button>
             </form>
         </div>
@@ -224,39 +248,29 @@
     <script>
         document.getElementById('next-url').value = window.location.origin + window.location.pathname + "?status=success";
 
-        // تحديث الساعة
         function updateClock() {
             const now = new Date();
-            document.getElementById('date').innerText = now.toLocaleDateString('ar-EG');
+            document.getElementById('date').innerText = now.toLocaleDateString('ar-EG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
             document.getElementById('time').innerText = now.toLocaleTimeString('ar-EG');
         }
-        setInterval(updateClock, 1000);
-        updateClock();
+        setInterval(updateClock, 1000); updateClock();
 
-        // منطق المساعد الذكي
         const aiInput = document.getElementById('ai-input');
         const chatBody = document.getElementById('chat-body');
-
         aiInput.addEventListener('keypress', function (e) {
             if (e.key === 'Enter' && this.value.trim() !== "") {
-                const text = this.value;
-                addMsg(text, 'user-msg');
-                this.value = "";
+                const text = this.value; addMsg(text, 'user-msg'); this.value = "";
                 setTimeout(() => {
-                    let r = "تواصل مع المبرمج للحصول على تفاصيل دقيقة.";
+                    let r = "تواصل مع المبرمج للحصول على تفاصيل.";
                     if (text.includes("مين") || text.includes("مبرمج")) r = "برمجني شخص اسمه محمود عصام من السودان يقيم في مدينة نيالا.";
-                    else if (text.includes("بنك")) r = "نوفر خدمات فتح حسابات بنكك وفوري ببراعة.";
+                    else if (text.includes("سلام") || text.includes("مرحبا")) r = "أهلاً بك في موقع البحير نت! كيف يمكنني مساعدتك؟";
                     addMsg(r, 'ai-msg');
                 }, 600);
             }
         });
 
-        function addMsg(t, c) {
-            const d = document.createElement('div'); d.className = c; d.innerText = t;
-            chatBody.appendChild(d); chatBody.scrollTop = chatBody.scrollHeight;
-        }
+        function addMsg(t, c) { const d = document.createElement('div'); d.className = c; d.innerText = t; chatBody.appendChild(d); chatBody.scrollTop = chatBody.scrollHeight; }
 
-        // التحكم في الصفحات وشاشة الترحيب
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('status') === 'success') {
@@ -265,14 +279,16 @@
                 return;
             }
 
-            setTimeout(() => { document.getElementById('welcome-msg-1').style.display = 'none'; document.getElementById('welcome-msg-2').style.display = 'block'; }, 3000);
+            // توقيتات شاشة الترحيب الأصلية
+            setTimeout(() => { document.getElementById('welcome-msg-1').style.display = 'none'; document.getElementById('welcome-msg-2').style.display = 'block'; }, 4500);
+            setTimeout(() => { document.getElementById('welcome-msg-2').style.display = 'none'; document.getElementById('thanks-msg').style.display = 'block'; document.getElementById('success-img').style.display = 'block'; }, 7500);
             setTimeout(() => {
                 document.getElementById('splash-screen').style.opacity = '0';
                 setTimeout(() => { 
                     document.getElementById('splash-screen').style.display = 'none'; 
                     document.getElementById('main-content').style.display = 'block'; 
                 }, 1000);
-            }, 6000);
+            }, 10000);
         };
     </script>
 </body>
