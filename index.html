@@ -106,7 +106,7 @@
             margin: 20px auto 40px auto;
         }
 
-        /* --- صندوق الذكاء الاصطناعي تحت الروابط --- */
+        /* --- صندوق الذكاء الاصطناعي --- */
         #ai-embedded-chat {
             width: 100%;
             background: #f8fbff;
@@ -117,7 +117,6 @@
             display: flex;
             flex-direction: column;
             text-align: right;
-            box-shadow: 0 5px 15px rgba(0, 85, 212, 0.1);
         }
 
         .chat-header {
@@ -165,7 +164,6 @@
             border-top: 1px solid #cce0ff;
             outline: none;
             box-sizing: border-box;
-            background: #fcfdfe;
         }
 
         .tech-main-image {
@@ -185,7 +183,7 @@
 
         #time { color: #0055d4 !important; font-size: 2rem; font-weight: bold; }
 
-        .form-group { margin-bottom: 20px; text-align: right; padding: 0 10px; }
+        .form-group { margin-bottom: 20px; text-align: right; }
         
         textarea, input, select {
             width: 100%;
@@ -193,7 +191,6 @@
             border: 2px solid #a3c2f0;
             border-radius: 10px;
             box-sizing: border-box;
-            font-size: 1rem;
         }
 
         button {
@@ -205,7 +202,6 @@
             font-weight: bold;
             cursor: pointer;
             width: 90%;
-            font-size: 1.1rem;
         }
 
         .fb-link {
@@ -217,7 +213,6 @@
             border-radius: 50px;
             border: 1px solid #0055d4;
             margin-bottom: 10px;
-            font-weight: bold;
         }
     </style>
 </head>
@@ -227,9 +222,8 @@
     <div id="success-page" style="display:none; text-align:center; padding-top:100px;">
         <div class="contact-container">
             <h2 style="color: #28a745;">✅ تم إرسال الرسالة بنجاح</h2>
-            <p>شكراً لتواصلك معنا، سنرد عليك قريباً جداً.</p>
-            <br>
-            <a href="javascript:void(0)" onclick="location.href=window.location.pathname" class="fb-link">هل تريد الرجوع لموقع البحير نت؟ 🌐</a>
+            <p>شكراً لتواصلك معنا، سنرد عليك قريباً.</p>
+            <a href="javascript:void(0)" onclick="location.href=window.location.pathname" class="fb-link">العودة للرئيسية</a>
         </div>
     </div>
 
@@ -257,14 +251,14 @@
             <h6 style="font-weight: bold;">تم بناء وتصميم الموقع بواسطة المبرمج محمود عصام...</h6>
             <hr>
 
-            <a href="https://www.facebook.com/profile.php?id=100077831043049" target="_blank" class="fb-link">لمتابعة مبرمج الموقع محمود عصام على فيسبوك 🌐</a>
+            <a href="https://www.facebook.com/profile.php?id=100077831043049" target="_blank" class="fb-link">لمتابعة مبرمج الموقع على فيسبوك 🌐</a>
             <br>
             <a href="https://www.facebook.com/profile.php?id=61573366409779" target="_blank" class="fb-link">لمتابعة اخبار صفحتنا علي فيسبوك 🌐</a>
 
             <div id="ai-embedded-chat">
                 <div class="chat-header">مساعد البحير الذكي 🤖</div>
                 <div id="chat-body">
-                    <div class="ai-msg">أهلاً بك! أنا مساعدك الذكي في موقع البحير نت. برمجني المبدع محمود عصام لأجيب على استفساراتك التقنية. كيف يمكنني مساعدتك اليوم؟</div>
+                    <div class="ai-msg">أهلاً بك في موقع البحير نت! أنا مساعدك الذكي، كيف يمكنني مساعدتك في خدماتنا التقنية اليوم؟</div>
                 </div>
                 <input type="text" id="ai-input" placeholder="اكتب سؤالك هنا واضغط Enter...">
             </div>
@@ -305,20 +299,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label style="display:block; margin-bottom:5px;">اكتب رسالتك داخل المستطيل</label>
-                    <textarea name="الرسالة" rows="4" placeholder="اكتب رسالتك..." required></textarea>
+                    <textarea name="الرسالة" rows="4" placeholder="اكتب رسالتك داخل المستطيل..." required></textarea>
                 </div>
-
-                <div class="form-group">
-                    <label style="display:block; margin-bottom:5px;">ما تقييمك لخدماتنا؟</label>
-                    <select name="تقييم الخدمات" required>
-                        <option value="" disabled selected>اختر خياراً...</option>
-                        <option value="راضي جدا">راضي جدا</option>
-                        <option value="راضي">راضي</option>
-                        <option value="غير راضي">غير راضي</option>
-                    </select>
-                </div>
-
                 <button type="submit">إرسال البيانات</button>
             </form>
 
@@ -328,20 +310,16 @@
     </div>
 
     <script>
-        // إعدادات الروابط
         document.getElementById('next-url').value = window.location.origin + window.location.pathname + "?status=success";
 
-        // وظيفة الساعة
         function updateClock() {
             const now = new Date();
-            const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('date').textContent = now.toLocaleDateString('ar-EG', dateOptions);
+            document.getElementById('date').textContent = now.toLocaleDateString('ar-EG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
             document.getElementById('time').textContent = now.toLocaleTimeString('ar-EG');
         }
         setInterval(updateClock, 1000);
         updateClock();
 
-        // منطق الذكاء الاصطناعي الخاص بمحمود عصام
         const aiInput = document.getElementById('ai-input');
         const chatBody = document.getElementById('chat-body');
 
@@ -355,16 +333,32 @@
                     let r = "عذراً، لم أفهم طلبك جيداً. يمكنك التواصل مباشرة مع المبرمج محمود عصام عبر الفيسبوك.";
                     const input = userText.toLowerCase();
                     
-                    if(input.includes("محمود") || input.includes("مصمم") || input.includes("مبرمج")) 
-                        r = "المبرمج والمصمم هو محمود عصام، وهو خبير في التقنية والذكاء الاصطناعي.";
-                    else if(input.includes("بنك") || input.includes("بنكك") || input.includes("فوري")) 
-                        r = "نعم، نقدم خدمة فتح حسابات بنكك وفوري والخدمات البنكية السودانية بأسعار مناسبة.";
-                    else if(input.includes("فيسبوك") || input.includes("حساب") || input.includes("قفل")) 
-                        r = "نحن متخصصون في تأمين واسترجاع حسابات الفيسبوك وتأكيد الهوية بالبطاقة القومية.";
-                    else if(input.includes("واي فاي") || input.includes("شبكة") || input.includes("أنتينا")) 
-                        r = "البحير نت متميز في برمجة شبكات الواي فاي وتركيب منظومات الأنتينا لتقوية الإشارة.";
-                    else if(input.includes("سلام") || input.includes("مرحبا") || input.includes("هلا")) 
-                        r = "أهلاً بك في موقع البحير نت! أنا المساعد الذكي، كيف أخدمك اليوم؟";
+                    // الرد على سؤال المبرمج
+                    if(input.includes("من انت") || input.includes("مين") || input.includes("مصمم") || input.includes("مبرمج") || input.includes("صاحب")) {
+                        r = "برمجني شخص اسمه محمود عصام من السودان يقيم في مدينة نيالا.";
+                    }
+                    // الرد على الخدمات الموجودة في الفورم
+                    else if(input.includes("بنكك") || input.includes("بنك") || input.includes("المشرق") || input.includes("النيل") || input.includes("الاسلامي")) {
+                        r = "نعم، نوفر خدمات فتح حسابات (بنكك، بنك المشرق، البنك الإسلامي، بنك النيل). يرجى اختيار الخدمة من القائمة بالأسفل.";
+                    }
+                    else if(input.includes("فيسبوك") || input.includes("فايسبوك") || input.includes("قفل") || input.includes("تأكيد")) {
+                        r = "متخصصون في فك قفل حسابات الفيسبوك، تأمين الحسابات، وتأكيدها بالبطاقة القومية.";
+                    }
+                    else if(input.includes("فوري") || input.includes("محفظة") || input.includes("كاش")) {
+                        r = "نوفر خدمات فتح حساب فوري والمحافظ الإلكترونية وخدمات الكاش.";
+                    }
+                    else if(input.includes("واي فاي") || input.includes("شبكة") || input.includes("أنتينا")) {
+                        r = "لدينا خبرة في برمجة شبكات الواي فاي وربط الأنتينا لتقوية الإشارة.";
+                    }
+                    else if(input.includes("واتساب") || input.includes("تويتر") || input.includes("انستغرام")) {
+                        r = "نعم، نقوم بفتح وحل مشاكل حسابات واتساب، تويتر، وانستغرام.";
+                    }
+                    else if(input.includes("استضافة") || input.includes("موقع")) {
+                        r = "نقدم خدمات استضافة المواقع الإلكترونية وإنشائها باحترافية.";
+                    }
+                    else if(input.includes("سلام") || input.includes("مرحبا") || input.includes("هلا")) {
+                        r = "أهلاً بك في موقع البحير نت! كيف يمكنني مساعدتك في خدماتنا اليوم؟";
+                    }
                     
                     addMsg(r, 'ai-msg');
                 }, 700);
@@ -379,7 +373,6 @@
             chatBody.scrollTop = chatBody.scrollHeight;
         }
 
-        // التحكم في شاشة الترحيب
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('status') === 'success') {
@@ -388,23 +381,11 @@
                 return;
             }
 
-            setTimeout(() => { 
-                document.getElementById('welcome-msg-1').style.display = 'none'; 
-                document.getElementById('welcome-msg-2').style.display = 'block'; 
-            }, 4500);
-
-            setTimeout(() => { 
-                document.getElementById('welcome-msg-2').style.display = 'none'; 
-                document.getElementById('thanks-msg').style.display = 'block'; 
-                document.getElementById('success-img').style.display = 'block'; 
-            }, 7500);
-
+            setTimeout(() => { document.getElementById('welcome-msg-1').style.display = 'none'; document.getElementById('welcome-msg-2').style.display = 'block'; }, 4500);
+            setTimeout(() => { document.getElementById('welcome-msg-2').style.display = 'none'; document.getElementById('thanks-msg').style.display = 'block'; document.getElementById('success-img').style.display = 'block'; }, 7500);
             setTimeout(() => {
                 document.getElementById('splash-screen').style.opacity = '0';
-                setTimeout(() => { 
-                    document.getElementById('splash-screen').style.display = 'none'; 
-                    document.getElementById('main-content').style.display = 'block'; 
-                }, 1000);
+                setTimeout(() => { document.getElementById('splash-screen').style.display = 'none'; document.getElementById('main-content').style.display = 'block'; }, 1000);
             }, 10000);
         };
     </script>
