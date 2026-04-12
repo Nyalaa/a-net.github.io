@@ -8,15 +8,14 @@
     <title>البحير نت</title>
 
     <style>
-        /* --- تأثيرات شاشة الترحيب الذكية (AI Splash Screen) --- */
+        /* --- شاشة الترحيب --- */
         #splash-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle at center, #001a33 0%, #000000 100%);
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             z-index: 9999; transition: opacity 1s ease-out, visibility 1s;
-            color: #ffffff !important; text-align: center;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px;
+            color: #ffffff !important; text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .ai-loader {
@@ -33,207 +32,144 @@
 
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        .welcome-msg {
-            font-size: 1.2rem; text-shadow: 0 0 15px #0055d4; margin: 10px 0;
-            display: none; color: #ffffff !important; max-width: 300px;
-        }
-
+        .welcome-msg { font-size: 1.2rem; text-shadow: 0 0 15px #0055d4; display: none; margin: 10px 0; }
         #welcome-msg-1 { display: block; animation: pulse 2s infinite; }
 
-        .success-company-img {
-            width: 70%; max-width: 300px; height: auto; border-radius: 15px;
-            margin-top: 20px; box-shadow: 0 0 20px rgba(0, 85, 212, 0.5);
-            display: none; animation: fadeIn 1s forwards;
-        }
-
         @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.05); } }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* --- تنسيقات الموقع العام --- */
-        body {
-            font-family: Arial, Helvetica, sans-serif; margin: 0; padding: 0;
-            color: #000000; font-size: large; background-color: #e6f0ff;
-        }
-
+        /* --- التصميم العام للموقع --- */
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #e6f0ff; color: #000; }
         .contact-container {
-            background: #ffffff; padding: 40px; border-radius: 20px;
+            background: #ffffff; padding: 30px; border-radius: 20px;
             box-shadow: 0 15px 35px rgba(0, 85, 212, 0.15);
-            width: 90%; max-width: 550px; text-align: center; margin: 20px auto 40px auto;
+            width: 90%; max-width: 550px; text-align: center; margin: 20px auto;
         }
 
-        .back-link-btn {
-            display: inline-block; margin-top: 20px; padding: 12px 25px;
-            background: linear-gradient(45deg, #0055d4, #00a2ff); color: white !important;
-            text-decoration: none; border-radius: 50px; font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0, 85, 212, 0.3); transition: 0.3s;
+        /* --- نافذة الذكاء الاصطناعي (في المنتصف) --- */
+        #ai-embedded-chat {
+            background: #f8fbff; border: 2px solid #0055d4; border-radius: 15px;
+            margin: 20px 0; overflow: hidden; display: flex; flex-direction: column;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
+        .ai-header { background: #0055d4; color: white; padding: 10px; font-weight: bold; }
+        #chat-body { height: 200px; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; text-align: right; }
+        .ai-msg { background: #e1ecf7; padding: 8px; border-radius: 8px; align-self: flex-start; font-size: 0.9rem; border: 1px solid #d0e0f0; }
+        .user-msg { background: #0055d4; color: white; padding: 8px; border-radius: 8px; align-self: flex-end; font-size: 0.9rem; }
+        #ai-input { width: 100%; border: none; padding: 12px; box-sizing: border-box; outline: none; border-top: 1px solid #eee; }
 
-        .tech-main-image { width: 100%; max-width: 500px; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-
-        #clock-container {
-            background-color: #f0f7ff; padding: 20px; border-radius: 10px; text-align: center;
-            width: fit-content; margin: 20px auto; border: 1px solid #cce0ff;
-        }
-
-        #time { color: #0055d4 !important; font-size: 2rem; font-weight: bold; }
-
-        .form-group { margin-bottom: 20px; }
-        textarea, input, select { width: 95%; padding: 12px; border: 2px solid #a3c2f0; border-radius: 10px; outline: none; }
-        button { background-color: #0055d4; color: white !important; border: none; padding: 15px 30px; border-radius: 10px; font-weight: bold; cursor: pointer; width: 85%; transition: 0.3s; }
+        /* --- الساعة والأزرار --- */
+        #clock-container { background: #f0f7ff; padding: 15px; border-radius: 10px; margin: 15px auto; border: 1px solid #cce0ff; width: fit-content; }
+        #time { color: #0055d4; font-size: 1.8rem; font-weight: bold; }
+        .fb-link { display: block; padding: 10px; background: #f0f7ff; color: #0055d4; text-decoration: none; border-radius: 50px; border: 1px solid #0055d4; margin: 5px auto; font-weight: bold; width: 80%; }
+        button { background-color: #0055d4; color: white; border: none; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; width: 90%; transition: 0.3s; }
         button:hover { background-color: #0041a3; }
-
-        .fb-link { display: inline-block; padding: 10px 20px; background-color: #f0f7ff; color: #0055d4 !important; text-decoration: none !important; border-radius: 50px; border: 1px solid #0055d4; margin-bottom: 10px; font-weight: bold; }
-
-        /* --- تنسيق المساعد الذكي (AI Chat) --- */
-        #ai-chat-container { position: fixed; bottom: 20px; left: 20px; z-index: 1000; font-family: sans-serif; }
-        #ai-chat-button { width: 60px; height: 60px; background: linear-gradient(45deg, #0055d4, #00a2ff); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-        #ai-chat-window { width: 280px; background: white; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); display: none; flex-direction: column; overflow: hidden; margin-bottom: 10px; }
-        .chat-header { background: #0055d4; color: white; padding: 12px; text-align: center; font-weight: bold; font-size: 0.9rem; }
-        #chat-body { height: 200px; padding: 10px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; background: #f9fbff; }
-        .ai-msg { background: #eef2f7; padding: 8px; border-radius: 10px; font-size: 0.85rem; align-self: flex-start; border-bottom-right-radius: 0; }
-        .user-msg { background: #0055d4; color: white; padding: 8px; border-radius: 10px; font-size: 0.85rem; align-self: flex-end; border-bottom-left-radius: 0; }
+        input, select, textarea { width: 95%; padding: 12px; margin: 10px 0; border: 2px solid #a3c2f0; border-radius: 10px; outline: none; }
         
-        #main-content { display: none; width: 100%; }
-        #success-page { display: none; text-align: center; padding: 50px 20px; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #e6f0ff; z-index: 10000; }
+        #main-content { display: none; }
     </style>
 </head>
 
 <body>
 
-    <div id="success-page">
-        <div class="contact-container" style="margin-top: 100px;">
-            <h2 style="color: #28a745 !important;">✅ تم إرسال الرسالة بنجاح</h2>
-            <p>شكراً لتواصلك معنا، سنرد عليك قريباً جداً.</p>
-            <a href="javascript:void(0)" onclick="goToHome()" class="back-link-btn">العودة للرئيسية 🌐</a>
-        </div>
-    </div>
-
     <div id="splash-screen">
         <div class="ai-loader"></div>
-        <div id="welcome-msg-1" class="welcome-msg">مرحباً بكم في موقع البحير نت <br> عالم التكنولوجيا والذكاء الاصطناعي</div>
-        <div id="welcome-msg-2" class="welcome-msg">نسعى دائماً لتقديم الأفضل لكم</div>
-        <div id="thanks-msg" class="welcome-msg">شكراً لصبرك أيها الزائر</div>
-        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80" class="success-company-img" id="success-img">
+        <div id="welcome-msg-1" class="welcome-msg">مرحباً بكم في البحير نت</div>
+        <div id="welcome-msg-2" class="welcome-msg">عالم التكنولوجيا بواسطة محمود عصام</div>
+        <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=600&q=80" id="success-img" style="width:200px; border-radius:15px; margin-top:15px; display:none;">
     </div>
 
     <div id="main-content">
         <div class="contact-container">
-            <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80" class="tech-main-image">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" style="width:100%; border-radius:15px; margin-bottom:15px;" alt="Technology">
 
             <div id="clock-container">
                 <div id="date">جاري التحميل...</div>
                 <div id="time">00:00:00</div>
             </div>
 
-            <hr>
-            <p>حلول تقنية كاملة في مجال التكنولوجيا ومواقع التواصل...</p>
-            <h6 style="font-weight: bold;">تم بناء وتصميم الموقع بواسطة المبرمج محمود عصام</h6>
-            <hr>
-
+            <p>حلول تقنية متكاملة لمشاكل التواصل الاجتماعي والبرمجة.</p>
+            <h6 style="font-weight: bold;">تصميم وبرمجة: المبرمج محمود عصام</h6>
+            
             <a href="https://www.facebook.com/profile.php?id=100077831043049" target="_blank" class="fb-link">المبرمج على فيسبوك 🌐</a>
-            <br>
-            <a href="https://www.facebook.com/profile.php?id=61573366409779" target="_blank" class="fb-link">أخبار صفحتنا 🌐</a>
+            <a href="https://www.facebook.com/profile.php?id=61573366409779" target="_blank" class="fb-link">صفحة البحير نت 🌐</a>
 
-            <form action="https://formsubmit.co/fastfyks@gmail.com" method="post" style="margin-top: 20px;">
-                <input type="hidden" name="_next" id="next-url" value="">
-                <input type="hidden" name="_captcha" value="false">
-                
-                <div class="form-group"><input type="text" name="الاسم" placeholder="ادخل الاسم الكامل" required></div>
-                <div class="form-group">
-                    <select name="نوع الخدمة" required>
-                        <option value="" disabled selected>اختر نوع الخدمة</option>
-                        <option value="فتح حساب">فتح حساب او كاش</option>
-                        <option value="تأمين حساب">تأمين حسابات فيسبوك</option>
-                        <option value="برمجة">برمجة شبكات واي فاي</option>
-                        <option value="بنكك">فتح حساب بنكك</option>
-                    </select>
+            <div id="ai-embedded-chat">
+                <div class="ai-header">مساعد البحير الذكي 🤖</div>
+                <div id="chat-body">
+                    <div class="ai-msg">أهلاً بك! أنا المساعد الذكي الخاص بمحمود عصام. اسألني عن أي خدمة!</div>
                 </div>
-                <div class="form-group"><textarea name="الرسالة" rows="3" placeholder="اكتب رسالتك..." required></textarea></div>
+                <input type="text" id="ai-input" placeholder="اكتب سؤالك هنا واضغط Enter...">
+            </div>
+
+            <form action="https://formsubmit.co/fastfyks@gmail.com" method="post">
+                <input type="hidden" name="_next" id="next-url" value="">
+                <input type="text" name="الاسم الكامل" placeholder="الاسم الكامل" required>
+                <select name="المشكلة" required>
+                    <option value="" disabled selected>اختار نوع تواصلك</option>
+                    <option value="فتح حساب">فتح حساب أو كاش</option>
+                    <option value="تأمين">تأمين حساب فيسبوك</option>
+                    <option value="شبكات">برمجة شبكات واي فاي</option>
+                </select>
+                <textarea name="الرسالة" rows="4" placeholder="اكتب تفاصيل طلبك هنا..." required></textarea>
                 <button type="submit">إرسال البيانات</button>
             </form>
         </div>
     </div>
 
-    <div id="ai-chat-container">
-        <div id="ai-chat-window">
-            <div class="chat-header">مساعد البحير الذكي 🤖</div>
-            <div id="chat-body">
-                <div class="ai-msg">مرحباً! أنا المساعد الذكي لموقع البحير نت. كيف يمكنني مساعدتك؟</div>
-            </div>
-            <div style="padding: 8px; border-top: 1px solid #eee;">
-                <input type="text" id="ai-input" placeholder="اسألني عن المصمم أو الخدمات..." style="width: 100%; border: none; font-size: 0.8rem;">
-            </div>
-        </div>
-        <div id="ai-chat-button" onclick="toggleChat()">
-            <img src="https://cdn-icons-png.flaticon.com/512/4712/4712035.png" width="30">
-        </div>
-    </div>
-
     <script>
-        // ضبط رابط النجاح
-        document.getElementById('next-url').value = window.location.origin + window.location.pathname + "?status=success";
-
-        // الساعة
+        // تحديث الساعة
         function updateClock() {
             const now = new Date();
-            document.getElementById('date').textContent = now.toLocaleDateString('ar-EG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            document.getElementById('date').textContent = now.toLocaleDateString('ar-EG', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
             document.getElementById('time').textContent = now.toLocaleTimeString('ar-EG');
         }
-        setInterval(updateClock, 1000); updateClock();
+        setInterval(updateClock, 1000);
+        updateClock();
 
-        function goToHome() { window.location.href = window.location.pathname; }
-
-        // المساعد الذكي
-        function toggleChat() {
-            const chatWin = document.getElementById('ai-chat-window');
-            chatWin.style.display = (chatWin.style.display === 'flex') ? 'none' : 'flex';
-        }
-
+        // منطق الذكاء الاصطناعي
         const aiInput = document.getElementById('ai-input');
+        const chatBody = document.getElementById('chat-body');
+
         aiInput.addEventListener('keypress', function (e) {
             if (e.key === 'Enter' && this.value.trim() !== "") {
                 const userText = this.value;
                 addMsg(userText, 'user-msg');
-                processAI(userText.toLowerCase());
                 this.value = "";
+                
+                setTimeout(() => {
+                    let res = "عذراً، تواصل مع محمود عصام لمزيد من التفاصيل.";
+                    const input = userText.toLowerCase();
+                    if(input.includes("من") || input.includes("برمج") || input.includes("صمم")) res = "تم تصميمي وبرمجتي بواسطة المبدع محمود عصام.";
+                    if(input.includes("فيسبوك") || input.includes("حساب")) res = "محمود عصام خبير في استرجاع وتأمين حسابات الفيسبوك.";
+                    if(input.includes("واي فاي") || input.includes("شبكة")) res = "نحن نوفر أفضل خدمات برمجة الشبكات في البحير نت.";
+                    addMsg(res, 'ai-msg');
+                }, 700);
             }
         });
 
-        function addMsg(t, c) {
-            const d = document.createElement('div'); d.className = c; d.textContent = t;
-            const b = document.getElementById('chat-body'); b.appendChild(d); b.scrollTop = b.scrollHeight;
+        function addMsg(text, cls) {
+            const div = document.createElement('div');
+            div.className = cls;
+            div.textContent = text;
+            chatBody.appendChild(div);
+            chatBody.scrollTop = chatBody.scrollHeight;
         }
 
-        function processAI(i) {
-            let r = "يمكنك طلب هذه الخدمة عبر النموذج، أو مراسلة محمود عصام مباشرة.";
-            if (i.includes("من") || i.includes("مصمم") || i.includes("برمج") || i.includes("محمود")) {
-                r = "تم تصميم وبرمجة هذا الموقع بالكامل بواسطة المبدع محمود عصام.";
-            } else if (i.includes("سلام") || i.includes("مرحبا")) {
-                r = "وعليكم السلام! أنا مساعد البحير الذكي، كيف يمكنني مساعدتك في خدماتنا التقنية؟";
-            } else if (i.includes("فيسبوك") || i.includes("حساب")) {
-                r = "نحن متخصصون في استرجاع وتأمين حسابات الفيسبوك، اترك بياناتك وسنتواصل معك.";
-            }
-            setTimeout(() => addMsg(r, 'ai-msg'), 700);
-        }
-
-        // التحكم في الشاشات
+        // شاشة الترحيب
         window.onload = function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('status') === 'success') {
-                document.getElementById('success-page').style.display = 'block';
-                document.getElementById('splash-screen').style.display = 'none';
-                return;
-            }
-
-            setTimeout(() => { document.getElementById('welcome-msg-1').style.display = 'none'; document.getElementById('welcome-msg-2').style.display = 'block'; }, 4000);
-            setTimeout(() => { document.getElementById('welcome-msg-2').style.display = 'none'; document.getElementById('thanks-msg').style.display = 'block'; document.getElementById('success-img').style.display = 'block'; }, 7000);
+            document.getElementById('next-url').value = window.location.href + "?status=success";
             setTimeout(() => { 
+                document.getElementById('welcome-msg-1').style.display = 'none';
+                document.getElementById('welcome-msg-2').style.display = 'block';
+                document.getElementById('success-img').style.display = 'block';
+            }, 3000);
+            setTimeout(() => {
                 document.getElementById('splash-screen').style.opacity = '0';
-                setTimeout(() => { 
-                    document.getElementById('splash-screen').style.display = 'none'; 
-                    document.getElementById('main-content').style.display = 'block'; 
+                setTimeout(() => {
+                    document.getElementById('splash-screen').style.display = 'none';
+                    document.getElementById('main-content').style.display = 'block';
                 }, 1000);
-            }, 9000);
+            }, 6000);
         };
     </script>
 </body>
